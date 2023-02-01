@@ -1,0 +1,189 @@
+version: '3'
+
+networks:
+  admin_net:
+
+services:
+  nginx:
+    build:
+      context: ./docker
+      dockerfile: nginx.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - USER=${USER:-developer}
+    restart: unless-stopped
+    container_name: webserver
+    ports:
+      - 8000:8000
+      - 9000:9000
+      - 1000:1000
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+    depends_on:
+      - redis
+      - mysql
+      - phpmyadmin
+      - mailhog
+      - backend
+      - frontend
+      - admin
+    networks:
+      - admin_net
+
+  mysql:
+    image: mariadb:10.6
+    container_name: database
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${DB_FORWARD_PORT:-3307}:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - admin_net
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    container_name: cache
+    ports:
+      - 6380:6379
+    networks:
+      - admin_net
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailer
+    logging:
+      driver: 'none'
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - admin_net
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: database_admin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: ${DB_HOST}
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+      PMA_PORT: ${DB_PORT}
+    depends_on:
+      - mysql
+    ports:
+      - 8888:80
+    networks:
+      - admin_net
+
+  frontend:
+#    network_mode: "host"
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: frontend
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+    ports:
+      - 666:666
+    working_dir: /var/www/html/frontend
+    entrypoint: ["npm", "run", "dev" ]
+    networks:
+      - admin_net
+
+  backend:
+#    network_mode: "host"
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: backend
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+      - ./.env:/var/www/html/backend/.env
+    ports:
+      - 333:333
+    working_dir: /var/www/html/backend
+    entrypoint: ["npm", "run", "start:debug" ]
+    networks:
+      - admin_net
+  admin:
+#    network_mode: "host"
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: admin
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+      - /home/developer/.config/refine-update-notifier-nodejs/config.json:/~/.config/refine-update-notifier-nodejs/config.json
+    ports:
+      - 999:999
+    working_dir: /var/www/html/admin
+    entrypoint: ["npm", "run", "dev" ]
+    networks:
+      - admin_net
+  npm_front:
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: npm_front
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+    ports:
+      - 666:666
+    working_dir: /var/www/html/frontend
+    profiles: [ "npm" ]
+    entrypoint: [ 'npm' ]
+    networks:
+      - admin_net
+
+  npm_back:
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: npm_back
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+    ports:
+      - 333:333
+    working_dir: /var/www/html/backend
+    profiles: [ "npm" ]
+    entrypoint: [ 'npm' ]
+    networks:
+      - admin_net
+  npm_admin:
+    build:
+      context: ./docker
+      dockerfile: node.dockerfile
+    container_name: npm_admin
+    volumes:
+      - ./backend:/var/www/html/backend
+      - ./frontend:/var/www/html/frontend
+      - ./admin:/var/www/html/admin
+    ports:
+      - 999:999
+    working_dir: /var/www/html/admin
+    profiles: [ "npm" ]
+    networks:
+      - admin_net
