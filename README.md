@@ -4,7 +4,7 @@
 
 - API - Nestjs
 - Admin - Refine+Nextjs
-- Frontend - Nextjs
+- Client - Nextjs
 - Database - MySQL
 - Cache - Redis
 - Webserver - Nginx
