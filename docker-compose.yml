@@ -19,16 +19,16 @@ services:
       - 9000:9000
       - 1000:1000
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
     depends_on:
       - redis
       - mysql
       - phpmyadmin
       - mailhog
-      - backend
-      - frontend
+      - api
+      - client
       - admin
     networks:
       - admin_net
@@ -64,6 +64,7 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: mailer
+    restart: unless-stopped
     logging:
       driver: 'none'
     ports:
@@ -75,6 +76,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:5.2.0
     container_name: database_admin
+    restart: unless-stopped
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: ${DB_HOST}
@@ -88,49 +90,49 @@ services:
     networks:
       - admin_net
 
-  frontend:
-#    network_mode: "host"
+  client:
     build:
       context: ./docker
       dockerfile: node.dockerfile
-    container_name: frontend
+    container_name: client
+    restart: unless-stopped
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
     ports:
       - 666:666
-    working_dir: /var/www/html/frontend
+    working_dir: /var/www/html/client
     entrypoint: ["npm", "run", "dev" ]
     networks:
       - admin_net
 
-  backend:
-#    network_mode: "host"
+  api:
     build:
       context: ./docker
       dockerfile: node.dockerfile
-    container_name: backend
+    container_name: api
+    restart: unless-stopped
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
-      - ./.env:/var/www/html/backend/.env
+      - ./.env:/var/www/html/api/.env
     ports:
       - 333:333
-    working_dir: /var/www/html/backend
+    working_dir: /var/www/html/api
     entrypoint: ["npm", "run", "start:debug" ]
     networks:
       - admin_net
   admin:
-#    network_mode: "host"
     build:
       context: ./docker
       dockerfile: node.dockerfile
     container_name: admin
+    restart: unless-stopped
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
       - /home/developer/.config/refine-update-notifier-nodejs/config.json:/~/.config/refine-update-notifier-nodejs/config.json
     ports:
@@ -139,35 +141,35 @@ services:
     entrypoint: ["npm", "run", "dev" ]
     networks:
       - admin_net
-  npm_front:
+  npm_client:
     build:
       context: ./docker
       dockerfile: node.dockerfile
-    container_name: npm_front
+    container_name: npm_client
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
     ports:
       - 666:666
-    working_dir: /var/www/html/frontend
+    working_dir: /var/www/html/client
     profiles: [ "npm" ]
     entrypoint: [ 'npm' ]
     networks:
       - admin_net
 
-  npm_back:
+  npm_api:
     build:
       context: ./docker
       dockerfile: node.dockerfile
-    container_name: npm_back
+    container_name: npm_api
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
     ports:
       - 333:333
-    working_dir: /var/www/html/backend
+    working_dir: /var/www/html/api
     profiles: [ "npm" ]
     entrypoint: [ 'npm' ]
     networks:
@@ -178,8 +180,8 @@ services:
       dockerfile: node.dockerfile
     container_name: npm_admin
     volumes:
-      - ./backend:/var/www/html/backend
-      - ./frontend:/var/www/html/frontend
+      - ./api:/var/www/html/api
+      - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
     ports:
       - 999:999
