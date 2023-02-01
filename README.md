@@ -15,7 +15,7 @@
 Make sure you have `docker` and `docker-compose` installed in your system. \
 You can get `docker` at [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
 
-You can get `docker-compose` [Install the Compose standalone](https://docs.docker.com/compose/install/other/) at 
+You can get `docker-compose` at [Install the Compose standalone](https://docs.docker.com/compose/install/other/)
 
 To start the services run \
 `docker-compose up -d` or `docker compose up -d`
