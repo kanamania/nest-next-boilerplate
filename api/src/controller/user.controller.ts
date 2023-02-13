@@ -7,35 +7,73 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from 'src/service/user.service';
 import { UserEntity } from '../entity/user.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { TResponse } from '../types/TResponse';
 @Controller('users')
 export class UserController {
+  private response: TResponse = new TResponse();
   constructor(private userService: UserService) {}
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() user: UserEntity) {
-    const obj = await this.userService.create(user);
-    if (!obj) {
-      return 'error in creating user';
-    }
-    return 'user created successfully';
+    return await this.userService.create(user).then((response) => {
+      console.log(response);
+      if (!response) {
+        this.response.status = 'fail';
+        this.response.message = 'Creation fail.';
+      } else {
+        this.response.code = 201;
+        this.response.status = 'success';
+        this.response.message = 'User creation successful.';
+        this.response.data = response;
+      }
+      return this.response;
+    });
   }
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Req() request: Request) {
     console.log(request.body);
     const users: Array<UserEntity> = await this.userService.findAll();
+    this.response.code = 200;
+    this.response.status = 'success';
+    this.response.data = users;
     return users;
   }
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() body: any) {
-    await this.userService.update(id, body);
-    return 'user updated';
+    return await this.userService.update(id, body).then((response) => {
+      console.log(response);
+      if (!response.affected) {
+        this.response.status = 'fail';
+        this.response.message = 'Update fail.';
+      } else {
+        this.response.code = 201;
+        this.response.status = 'success';
+        this.response.message = 'User updated successful.';
+        this.response.data = response;
+      }
+      return this.response;
+    });
   }
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    await this.userService.delete(id);
-    return 'user deleted';
+    const obj = await this.userService.delete(id);
+    if (!obj) {
+      this.response.status = 'fail';
+      this.response.message = 'Deletion fail.';
+    } else {
+      this.response.code = 201;
+      this.response.status = 'success';
+      this.response.message = 'User deleted successful.';
+    }
+    return this.response;
   }
 }

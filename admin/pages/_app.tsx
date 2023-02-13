@@ -23,8 +23,28 @@ import {
   OffLayoutArea,
 } from "@components/layout";
 import { authProvider } from "src/authProvider";
+import axios, {AxiosRequestConfig} from "axios";
 
-const API_URL = "https://api.nestjsx-crud.refine.dev";
+const axiosInstance = axios.create();
+
+axiosInstance.interceptors.request.use(
+// @ts-ignore
+    (request: AxiosRequestConfig) => {
+      const token = JSON.parse(localStorage.geItem('auth')).access_token;
+      console.log({token})
+      if (request.headers) {
+        request.headers["Authorization"] = `Bearer ${token}`;
+      } else {
+        request.headers = {
+          Authorization: `Bearer ${token}`,
+        };
+      }
+
+      return request;
+    },
+    (error) => console.log(error)
+);
+const API_URL = "http://localhost:9000";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { t, i18n } = useTranslation();
@@ -40,19 +60,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <RefineKbarProvider>
         <Refine
           routerProvider={routerProvider}
-          dataProvider={dataProvider(API_URL)}
+          dataProvider={dataProvider(API_URL, axiosInstance)}
           notificationProvider={notificationProvider}
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
           resources={[
-            {
-              name: "posts",
-              list: AntdInferencer,
-              edit: AntdInferencer,
-              show: AntdInferencer,
-              create: AntdInferencer,
-              canDelete: true,
-            },
             {
               name: "users",
               list: AntdInferencer,

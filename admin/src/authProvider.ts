@@ -1,36 +1,32 @@
 import { AuthProvider } from "@pankod/refine-core";
-import nookies from "nookies";
+import {TResponse} from './utils/TResponse';
+import axios from "axios";
 
-const mockUsers = [
-  {
-    username: "admin",
-    email: "admin@refine.dev",
-    roles: ["admin"],
-  },
-  {
-    username: "editor",
-    email: "editor@refine.dev",
-    roles: ["editor"],
-  },
-];
+const axiosInstance = axios.create();
+
+const API_URL = "http://localhost:9000";
 
 export const authProvider: AuthProvider = {
-  login: ({ email, username, password, remember }) => {
+  login: async ({email, password}) => {
+    const data = { email, password };
     // Suppose we actually send a request to the back end here.
-    const user = mockUsers[0];
-
-    if (user) {
-      nookies.set(null, "auth", JSON.stringify(user), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: "/",
-      });
-      return Promise.resolve();
-    }
-
-    return Promise.reject();
+    await fetch(API_URL + '/auth/login', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(data),
+    }).then((response) => response.json()).then((response: TResponse) => {
+      if(response.status=='success'){
+        axiosInstance.defaults.headers.common = {
+          Authorization: `Bearer ${response.access_token}`,
+        };
+        localStorage.setItem('auth', JSON.stringify(response))
+        return Promise.resolve();
+      }
+      return Promise.reject();
+    });
   },
   logout: () => {
-    nookies.destroy(null, "auth");
+    localStorage.removeItem('auth');
     return Promise.resolve();
   },
   checkError: (error) => {
@@ -41,11 +37,11 @@ export const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkAuth: (ctx) => {
-    const cookies = nookies.get(ctx);
-    return cookies["auth"] ? Promise.resolve() : Promise.reject();
+    const auth = JSON.parse(localStorage.getItem('auth') ?? '');
+    return auth.access_token ? Promise.resolve() : Promise.reject();
   },
   getPermissions: () => {
-    const auth = nookies.get()["auth"];
+    const auth = localStorage.getItem('auth');
     if (auth) {
       const parsedUser = JSON.parse(auth);
       return Promise.resolve(parsedUser.roles);
@@ -53,10 +49,10 @@ export const authProvider: AuthProvider = {
     return Promise.reject();
   },
   getUserIdentity: () => {
-    const auth = nookies.get()["auth"];
+    const auth = localStorage.getItem('auth');
     if (auth) {
       const parsedUser = JSON.parse(auth);
-      return Promise.resolve(parsedUser.username);
+      return Promise.resolve(parsedUser.first_name+' '+parsedUser.last_name);
     }
     return Promise.reject();
   },

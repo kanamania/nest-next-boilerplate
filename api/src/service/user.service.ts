@@ -1,20 +1,29 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { UserEntityRepository } from '../repository/userEntityRepository';
+import { Encrypt } from '../utils/encrypt';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: UserEntityRepository,
   ) {}
-  create(user: UserEntity): Promise<UserEntity> {
+
+  async create(user: UserEntity): Promise<UserEntity> {
+    user.password = await Encrypt.cryptPassword(user.password);
     return this.userRepository.save(this.userRepository.create(user));
   }
-  findAll(): Promise<UserEntity[]> {
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.userRepository.findOneBy({ id });
+  }
+  async findByEmail(email: string): Promise<UserEntity | undefined> {
+    return this.userRepository.findOneBy({ email });
+  }
+  async findAll(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
-  update(id: string, data: any): Promise<any> {
+  async update(id: string, data: any): Promise<any> {
     return this.userRepository
       .createQueryBuilder()
       .update()
@@ -29,7 +38,7 @@ export class UserService {
       .where('id = :id', { id })
       .execute();
   }
-  delete(id: string): Promise<any> {
+  async delete(id: string): Promise<any> {
     return this.userRepository
       .createQueryBuilder()
       .update()

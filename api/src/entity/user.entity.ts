@@ -13,6 +13,8 @@ export class UserEntity {
   email: string;
   @Column('bigint')
   phone: number;
+  @Column('text')
+  password: string;
   @Column('bigint', { unsigned: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })
