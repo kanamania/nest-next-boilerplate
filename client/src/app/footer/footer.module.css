@@ -1,0 +1,26 @@
+.footerContainer {
+    border-top: 2px solid #00000010;
+}
+.footerInner {
+    margin: auto 4.72%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 86px;
+    gap: 52px;
+}
+.copyrightText {
+    display: flex;
+    gap: 5px;
+}
+.socialMediaContainer {
+    display: flex;
+}
+.socialMediaContainer ul {
+    display: flex;
+    gap: 10px;
+}
+.socialMediaContainer li {
+    display: flex;
+    justify-items: end;
+}

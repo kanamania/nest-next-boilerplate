@@ -1,91 +1,191 @@
+"use client";
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from './page.module.css'
+import SeekInvestmentList from './homepage/SeekInvestmentList';
+import InvestNowCategories from './homepage/InvestNowCategories';
+import Footer from './footer/footer';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const seekInvestmentList = [
+        {
+            image: '/Rectangle36.png',
+            seeker: 'John Ulugu',
+            target: 'Tsh 5M /month',
+            time: '2 hours ago',
+            category: 'Livestock',
+        },
+        {
+            image: '/Rectangle37.png',
+            seeker: 'Haitham Omar',
+            target: 'Tsh 10M /one time',
+            time: '6 hours ago',
+            category: 'Livestock',
+        },
+        {
+            image: '/Rectangle38.png',
+            seeker: 'Millard John',
+            target: 'USD 8,500 /month',
+            time: '2 days ago',
+            category: 'Mining',
+        },
+        {
+            image: '/Rectangle39.png',
+            seeker: 'MG & Company',
+            target: 'Tsh 8M /month',
+            time: '2 days ago',
+            category: 'Startup Business',
+        },
+        {
+            image: '/Rectangle47.png',
+            seeker: 'Anara Recruitment Platform',
+            target: 'Tsh 2.4M /month',
+            time: '3 days ago',
+            category: 'Startup Business',
+        },
+    ];
+    const investNowCategories = [
+        {
+            icon: 'realestate.svg',
+            title: 'Real Estate Development',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'tourism.svg',
+            title: 'Tourism',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'pharmaceutical.svg',
+            title: 'Pharmaceutical',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'energy.svg',
+            title: 'Energy',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'livestock.svg',
+            title: 'Livestock',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'manufacturing.svg',
+            title: 'Manufacturing',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'agriculture.svg',
+            title: 'Agriculture',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+        {
+            icon: 'mining.svg',
+            title: 'Mining',
+            banner: '/Rectangle10.jpg',
+            content: 'Nibh lorem in volutpat ac cursus pharetra. Neque pretium dui non gravida turpis orci, consectetur fermentum. In urna, pulvinar est ultricies mi ultrices laoreet.\n' +
+                '\n' +
+                'Viverra viverra odio risus duis augue felis sit vitae dignissim. Fames scelerisque amet egestas augue diam integer libero. In aliquam dui metus tempus consectetur risus.',
+            button_text: 'Learn More',
+            button_link: '#',
+        },
+    ];
+    const socialMediaLinks = [
+        {
+            title: 'twitter',
+            icon: '/twitter.svg',
+            link: '#',
+        },
+        {
+            title: 'facebook',
+            icon: '/facebook.svg',
+            link: '#',
+        },
+        {
+            title: 'instagram',
+            icon: '/instagram.svg',
+            link: '#',
+        },
+    ];
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <>
+          <main className={styles.main}>
+              <div className={styles.investNow}>
+              <div className={styles.investNowHeading}>
+                  <h3 className={styles.investNowTitle}>INVEST NOW</h3>
+                  <div className={styles.investNowCountryToggle}>
+                      <button><Image alt="" width={41.5} height={30} src="/TzFlag.svg"/><span>TANZANIA</span></button>
+                      <button><span>ALL COUNTRIES</span></button>
+                  </div>
+              </div>
+              <div className={styles.investNowContainer}>
+                  <div className={styles.investNowFilter}>
+                      <button className={styles.investNowFilterSelected}>
+                          <Image width={30} height={30} alt="By Sector" src="/sectoricon.svg"></Image>
+                          <span>By Sector</span>
+                      </button>
+                      <button>
+                          <Image width={30} height={30} alt="By Sector" src="/regionicon.svg"></Image>
+                          <span>By Region</span>
+                      </button>
+                  </div>
+                  <div className={styles.investNowCategories}>
+                      <InvestNowCategories list={investNowCategories}/>
+                  </div>
+              </div>
+              </div>
+              <div className={styles.seekInvestment}>
+                  <h3 className={styles.seekInvestmentTitle}>SEEK INVESTMENT</h3>
+                  <div className={styles.seekInvestmentContainer}>
+                      <div className={styles.seekInvestmentContainerBanner}>
+                          <span>Do you have a viable business? Register now to see investment from unlimited potential
+                              investors</span>
+                          <button>Register Now</button>
+                      </div>
+                      <SeekInvestmentList list={seekInvestmentList}/>
+                  </div>
+              </div>
+          </main>
+          <Footer social_links={socialMediaLinks}/>
+      </>
   )
 }
