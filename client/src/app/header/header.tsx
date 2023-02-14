@@ -2,42 +2,42 @@ import styles from './header.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Header() {
+export default function Header(props: {current: string, headerInfo: {heading: any, text: any, buttonText: any, buttonLink: any}}) {
     return (
         <header className={styles.headerContainer}>
             <div className={styles.menuBar}>
-                <div className={styles.brand}>Alpha<b>Project</b></div>
+                <div className={styles.brand}>
+                    <Link href="/">Alpha<b>Project</b></Link>
+                </div>
                 <ul className={styles.menu}>
                     <li>
-                        <Link href="/pages/aboutus">About<br/>Us</Link>
+                        <Link className={`${props.current=='aboutus' ? styles.menuSelected : null}`.trim()} href="/aboutus">About<br/>Us</Link>
                     </li>
                     <li>
-                        <Link href="/pages/investnow">Invest<br/>Now</Link>
+                        <Link className={`${props.current=='investnow' ? styles.menuSelected : null}`.trim()} href="/investnow">Invest<br/>Now</Link>
                     </li>
                     <li>
-                        <Link href="/pages/seekinvestment">Seek<br/>Investment</Link>
+                        <Link className={`${props.current=='seekinvestment' ? styles.menuSelected : null}`.trim()} href="/seekinvestment">Seek<br/>Investment</Link>
                     </li>
                     <li>
-                        <Link href="/pages/portal">Information<br/>Portal</Link>
+                        <Link className={`${props.current=='portal' ? styles.menuSelected : null}`.trim()} href="/portal">Information<br/>Portal</Link>
                     </li>
                     <li>
-                        <Link href="/pages/diaspora">Diaspora</Link>
+                        <Link className={`${props.current=='diaspora' ? styles.menuSelected : null}`.trim()} href="/diaspora">Diaspora</Link>
                     </li>
                     <li>
-                        <Link href="/pages/parkinglot">Parking<br/>Lot</Link>
+                        <Link className={`${props.current=='parkinglot' ? styles.menuSelected : null}`.trim()} href="/parkinglot">Parking<br/>Lot</Link>
                     </li>
                     <li>
-                        <Link href="/pages/mediacenter">Media<br/>Center</Link>
+                        <Link className={`${props.current=='mediacenter' ? styles.menuSelected : null}`.trim()} href="/mediacenter">Media<br/>Center</Link>
                     </li>
                 </ul>
             </div>
             <div className={styles.headerDescription}>
                 <Image alt="..." className={styles.headerDescriptionAngle} src="/angle.svg" width={82} height={113} />
-                <h1 className={styles.headerDescriptionTitle}>INVESTOR</h1>
-                <p className={styles.headerDescriptionText}>
-                    Find investment opportunies, and invest in potential businesses right from your fingertips.
-                </p>
-                <button className={styles.headerDescriptionButton}>Join the platform</button>
+                <h1 className={styles.headerDescriptionTitle}>{props.headerInfo ? props.headerInfo.heading: null}</h1>
+                <p className={styles.headerDescriptionText}>{props.headerInfo ? props.headerInfo.text : null}</p>
+                <a href={props.headerInfo ? props.headerInfo.buttonLink : null}  className={styles.headerDescriptionButton}>{props.headerInfo ? props.headerInfo.buttonText : null}</a>
             </div>
         </header>
     )

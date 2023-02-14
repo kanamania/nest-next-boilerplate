@@ -23,6 +23,7 @@
     gap: 46px;
     right: 4.76%;
     position: relative;
+    margin-bottom: 0;
 }
 .menu li {
     display: inline-flex;

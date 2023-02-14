@@ -12,6 +12,7 @@
 .copyrightText {
     display: flex;
     gap: 5px;
+    align-content: center;
 }
 .socialMediaContainer {
     display: flex;

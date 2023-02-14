@@ -5,11 +5,13 @@ import styles from './page.module.css'
 import SeekInvestmentList from './homepage/SeekInvestmentList';
 import InvestNowCategories from './homepage/InvestNowCategories';
 import Footer from './footer/footer';
+import Layout from '@/app/layout';
+import Aboutus from '@/pages/aboutus';
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+function Home() {
     const seekInvestmentList = [
         {
             image: '/Rectangle36.png',
@@ -129,23 +131,6 @@ export default function Home() {
             button_link: '#',
         },
     ];
-    const socialMediaLinks = [
-        {
-            title: 'twitter',
-            icon: '/twitter.svg',
-            link: '#',
-        },
-        {
-            title: 'facebook',
-            icon: '/facebook.svg',
-            link: '#',
-        },
-        {
-            title: 'instagram',
-            icon: '/instagram.svg',
-            link: '#',
-        },
-    ];
   return (
       <>
           <main className={styles.main}>
@@ -185,7 +170,22 @@ export default function Home() {
                   </div>
               </div>
           </main>
-          <Footer social_links={socialMediaLinks}/>
       </>
   )
 }
+Home.getLayout = (page: React.ReactNode) => (
+    <Layout
+        headerInfo={{
+            heading: 'INVESTOR',
+            text: "Find investment opportunities, and invest in potential businesses right from your fingertips.",
+            buttonText: "Join the platform",
+            buttonLink: "#"
+        }}
+        current="home"
+        meta={{
+            title: "Home",
+            description: "Home"
+        }}
+    >{page}</Layout>
+)
+export default Home;

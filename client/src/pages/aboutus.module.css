@@ -1,0 +1,131 @@
+.aboutMain {
+    width: 92%;
+    margin: auto;
+}
+.aboutTopContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.aboutTopContainer h3{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+.aboutTopContainer p{
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    width: 671px;
+    height: 74px;
+    color: #000000;
+    margin-top: 10px;
+}
+.aboutMiddleContainer {
+    margin: 37px auto 59px;
+}
+.aboutMiddleContainer img {
+    display: block;
+    width: 100%;
+}
+.aboutBottomContainer {
+    display: flex;
+    gap: 31px;
+    margin-bottom: 30px;
+}
+.aboutBottomContainerFirst {
+    width: 33.3%;
+}
+.aboutBottomContainerFirst h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+.aboutBottomContainerFirstInner {
+    padding: 40px 43px 48px 19px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    background: #fff;
+    border-radius: 20px;
+    min-height: 363px;
+}
+.aboutBottomContainerSecond {
+    width: 33.3%;
+    border-radius: 20px;
+    position: relative;
+}
+.aboutBottomContainerSecond h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+.aboutBottomContainerSecond a {
+    background: #FFFFFF;
+    border: 2px solid #007FFF;
+    border-radius: 100px;
+    width: 149px;
+    float: right;
+    text-align: center;
+    padding: 14px 30px;
+    position: absolute;
+    bottom: 15px;
+    right: 30px;
+}
+.aboutBottomContainerSecondInner {
+    padding: 40px 43px 48px 19px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    background: #fff;
+    border-radius: 20px;
+    min-height: 363px;
+}
+.aboutBottomContainerThird h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+.aboutBottomContainerThird {
+    width: 33.3%;
+}
+.aboutBottomContainerThirdInner {
+    padding: 40px 43px 48px 19px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    background: #fff;
+    border-radius: 20px;
+    min-height: 363px;
+}
+.aboutContactInfo {
+    display: flex;
+    gap: 12.5px;
+}
+.aboutContactInfoDetails {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 29px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+.aboutContactInfoDetails span {
+    margin-bottom: 5px;
+}
+.aboutLocationInfo {
+    display: flex;
+    gap: 12.5px;
+}
+.aboutLocationInfoDetails {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+.aboutLocationInfoDetails span {
+    margin-bottom: 5px;
+}
