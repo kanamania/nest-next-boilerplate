@@ -137,7 +137,7 @@ services:
       - /home/developer/.config/refine-update-notifier-nodejs/config.json:/~/.config/refine-update-notifier-nodejs/config.json
     ports:
       - 999:999
-    working_dir: /var/www/html/admin/examples/demo
+    working_dir: /var/www/html/admin
     entrypoint: ["yarn", "dev" ]
     networks:
       - admin_net
