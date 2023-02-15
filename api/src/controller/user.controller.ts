@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -38,7 +39,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Req() request: Request) {
-    console.log(request.body);
     const users: Array<UserEntity> = await this.userService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
@@ -46,6 +46,16 @@ export class UserController {
     return this.response;
   }
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async get(@Param('id') id: number) {
+    const user: UserEntity = await this.userService.findById(id);
+    this.response.code = 200;
+    this.response.status = 'success';
+    this.response.data = user;
+    return user;
+  }
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
   @Put(':id')
   async update(@Param('id') id: string, @Body() body: any) {
     return await this.userService.update(id, body).then((response) => {
