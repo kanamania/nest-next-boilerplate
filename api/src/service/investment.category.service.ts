@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InvestmentCategoryEntity } from '../entity/investment.category.entity';
 import { InvestmentCategoryEntityRepository } from '../repository/investmentCategoryEntityRepository';
-import { Encrypt } from '../utils/encrypt';
 @Injectable()
 export class InvestmentCategoryService {
   constructor(

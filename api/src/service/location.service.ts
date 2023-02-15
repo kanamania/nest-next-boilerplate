@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LocationEntity } from '../entity/location.entity';
 import { LocationEntityRepository } from '../repository/locationEntityRepository';
-import { Encrypt } from '../utils/encrypt';
 @Injectable()
 export class LocationService {
   constructor(

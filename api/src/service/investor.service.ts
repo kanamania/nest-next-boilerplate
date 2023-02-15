@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InvestorEntity } from '../entity/investor.entity';
 import { InvestorEntityRepository } from '../repository/investorEntityRepository';
-import { Encrypt } from '../utils/encrypt';
 
 @Injectable()
 export class InvestorService {
