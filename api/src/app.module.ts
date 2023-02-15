@@ -13,9 +13,14 @@ import { LocationModule } from './module/location.module';
 import { InvestmentModule } from './module/investment.module';
 import { InvestmentAreaModule } from './module/investment.area.module';
 import { InvestmentCategoryModule } from './module/investment.category.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { FileModule } from './module/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 const IMPORTED_MODULES = [
   AuthModule,
+  FileModule,
   UserModule,
   LocationModule,
   InvestmentModule,
@@ -24,6 +29,12 @@ const IMPORTED_MODULES = [
 ];
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'files'),
+    }),
+    MulterModule.register({
+      dest: './files',
+    }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(connectionOptions),
     PassportModule,

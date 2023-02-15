@@ -1,16 +1,33 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('InvestmentCategory')
-export class InvestmentCategoryEntity {
+export enum FileStateType {
+  BAD = 'bad',
+  GOOD = 'good',
+}
+export enum FileType {
+  IMAGE = 'image',
+  DOCUMENT = 'document',
+  MEDIA = 'media',
+}
+@Entity('File')
+export class FileEntity {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
   @Column({ type: 'text' })
   name: string;
-  @Column({ type: 'text', nullable: true })
-  banner: string;
-  @Column({ type: 'longtext', nullable: true })
-  description: string;
-  @Column('bigint')
+  @Column({ type: 'text' })
+  hash: string;
+  @Column({ type: 'bigint' })
+  size: number;
+  @Column({ type: 'text' })
+  mime: string;
+  @Column({ type: 'text' })
+  path: string;
+  @Column({ type: 'enum', enum: FileType })
+  type: string;
+  @Column({ type: 'enum', enum: FileStateType })
+  state: string;
+  @Column('bigint', { unsigned: true, nullable: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })
   modified_by: number;

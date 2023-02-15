@@ -2,25 +2,43 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
   Param,
+  ParseFilePipe,
   Post,
   Put,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { LocationService } from '../service/location.service';
 import { LocationEntity } from '../entity/location.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
+import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('locations')
 export class LocationController {
   private response: TResponse = new TResponse();
   constructor(private locationService: LocationService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() location: LocationEntity) {
+  @UseInterceptors(FileInterceptor('banner'))
+  async create(
+    @Body() location: LocationEntity,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1000 }),
+          new FileTypeValidator({ fileType: 'image/jpeg' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
     return await this.locationService.create(location).then((response) => {
       console.log(response);
       if (!response) {

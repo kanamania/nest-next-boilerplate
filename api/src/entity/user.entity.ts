@@ -24,6 +24,8 @@ export class UserEntity {
   password: string;
   @Column({ type: 'enum', enum: UserType })
   type: string;
+  @Column({ type: 'text', nullable: true })
+  avatar: string;
   @Column('bigint', { unsigned: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })

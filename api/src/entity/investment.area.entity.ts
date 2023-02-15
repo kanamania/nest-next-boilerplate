@@ -7,7 +7,7 @@ export class InvestmentAreaEntity {
   @Column({ type: 'text' })
   name: string;
   @Column({ type: 'text', nullable: true })
-  icon: string;
+  banner: string;
   @Column({ type: 'longtext', nullable: true })
   description: string;
   @Column('bigint')
