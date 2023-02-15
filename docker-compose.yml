@@ -138,7 +138,7 @@ services:
     ports:
       - 999:999
     working_dir: /var/www/html/admin/examples/demo
-    entrypoint: ["yarn", "run", "run-demo" ]
+    entrypoint: ["yarn", "dev" ]
     networks:
       - admin_net
   npm_client:
