@@ -1,52 +1,29 @@
-# React-admin Demo
+# Boilerplate for Nestjs, Nextjs, Refine, MySQL, Redis, Mailhog and PHPMyAdmin
 
-This is a demo of the [react-admin](https://github.com/marmelab/react-admin) library for React.js. It creates a working administration for a fake poster shop named Posters Galore. You can test it online at https://marmelab.com/react-admin-demo.
+## Features
 
-[![react-admin-demo](https://marmelab.com/react-admin/img/react-admin-demo-still.png)](https://vimeo.com/268958716)
+- API - Nestjs
+- Admin - Refine+Nextjs
+- Client - Nextjs
+- Database - MySQL
+- Cache - Redis
+- Webserver - Nginx
+- Database Tool - PHPMyAdmin
+- Development Mailer - Mailhog
+- Others - TypeScript
 
-React-admin usually requires a REST/GraphQL server to provide data. In this demo however, the API is simulated by the browser (using [FakeRest](https://github.com/marmelab/FakeRest)). The source data is generated at runtime by a package called [data-generator](https://github.com/marmelab/react-admin/tree/master/examples/data-generator).
+Make sure you have `docker` and `docker-compose` installed in your system. \
+You can get `docker` at [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
 
-To explore the source code, start with [src/App.tsx](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/App.tsx).
+You can get `docker-compose` at [Install the Compose standalone](https://docs.docker.com/compose/install/other/)
 
-**Note**: This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+To start the services run \
+`docker-compose up -d` or `docker compose up -d`
 
-## How to run
+To stop the services run \
+`docker-compose stop` or `docker compose stop`
 
-After having cloned the react-admin repository, run the following commands at the react-admin root:
-
-```sh
-make install
-
-make build
-
-make run-demo
-```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm dev`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
-
-### `npm build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-### `npm run deploy`
-
-Deploy the build to GitHub gh-pages.
+## Screenshots
+Coming soon
+## Demo
+Coming soon
