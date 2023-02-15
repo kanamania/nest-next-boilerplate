@@ -1,13 +1,13 @@
 export const authProvider = {
     login: async (data: {email: string, password: string}) => {
-        // Suppose we actually send a request to the back end here.
         await fetch('http://localhost:9000/auth/login', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
         }).then((response) => response.json()).then((response) => {
             if(response.status=='success'){
-                localStorage.setItem('auth', JSON.stringify(response))
+                localStorage.setItem('auth', JSON.stringify({token: response.access_token, user: response.data}))
                 return Promise.resolve();
             }
             return Promise.reject();
@@ -21,13 +21,11 @@ export const authProvider = {
         if (error && error.statusCode === 401) {
             return Promise.reject();
         }
-
         return Promise.resolve();
     },
     checkAuth: (ctx: any) => {
-        console.log(ctx)
-        const auth = JSON.parse(localStorage.getItem('auth') ?? '');
-        return auth.access_token ? Promise.resolve() : Promise.reject();
+        const auth = JSON.parse(localStorage.getItem('auth') ?? '[]');
+        return auth.token ? Promise.resolve() : Promise.reject();
     },
     getPermissions: () => {
         const auth = localStorage.getItem('auth');
