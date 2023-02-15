@@ -6,13 +6,22 @@ import { UserModule } from './module/user.module';
 import { connectionOptions } from '../ormconfig';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './auth/constants';
 import { PassportModule } from '@nestjs/passport';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { LocationModule } from './module/location.module';
+import { InvestmentModule } from './module/investment.module';
+import { InvestmentAreaModule } from './module/investment.area.module';
+import { InvestmentCategoryModule } from './module/investment.category.module';
 
-const IMPORTED_MODULES = [UserModule, AuthModule];
+const IMPORTED_MODULES = [
+  AuthModule,
+  UserModule,
+  LocationModule,
+  InvestmentModule,
+  InvestmentAreaModule,
+  InvestmentCategoryModule,
+];
 @Module({
   imports: [
     ConfigModule.forRoot(),

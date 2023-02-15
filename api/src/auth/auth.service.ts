@@ -13,15 +13,12 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     if (!email || !pass) {
-      console.log('nothing found');
       return null;
     }
     const user: UserEntity = await this.usersService.findByEmail(email);
     if (user != null) {
-      console.log('email found');
       const check = await Encrypt.comparePassword(pass, user.password);
       if (check) {
-        console.log('password works');
         const {
           password,
           created_at,
@@ -38,7 +35,7 @@ export class AuthService {
     return null;
   }
   async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
+    const payload = { email: user.email ?? user.username, sub: user.id };
     return this.jwtService.sign(payload);
   }
 }

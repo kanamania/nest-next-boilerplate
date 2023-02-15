@@ -1,30 +1,29 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export enum UserType {
-  INVESTOR = 'investor',
-  SEEKER = 'seeker',
-  CONSULTANT = 'consultant',
-  ADMIN = 'admin',
-  WEBMASTER = 'webmaster',
+export enum InvestmentStatus {
+  PENDING = 'pending',
+  SEEKING = 'seeking',
+  INVESTED = 'invested',
+  FAILED = 'failed',
+  CANCELLED = 'cancelled',
 }
-@Entity('User')
-export class UserEntity {
+@Entity('Investment')
+export class InvestmentEntity {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
-
-  @Column({ type: 'varchar', length: 64 })
-  first_name: string;
-  @Column({ type: 'varchar', length: 64 })
-  last_name: string;
-  @Column({ type: 'varchar', length: 64 })
-  email: string;
+  @Column({ type: 'text' })
+  name: string;
+  @Column({ type: 'text', nullable: true })
+  icon: string;
+  @Column({ type: 'longtext', nullable: true })
+  description: string;
+  @Column({
+    type: 'enum',
+    enum: InvestmentStatus,
+    default: InvestmentStatus.PENDING,
+  })
+  status: string;
   @Column('bigint')
-  phone: number;
-  @Column('text')
-  password: string;
-  @Column({ type: 'enum', enum: UserType })
-  type: string;
-  @Column('bigint', { unsigned: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })
   modified_by: number;
