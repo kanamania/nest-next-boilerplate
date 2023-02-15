@@ -1,6 +1,6 @@
 import './globals.css'
 import Header from './header/header'
-import Heading from '@/app/Heading';
+import Head from '@/app/head';
 import Footer from '@/app/footer/footer';
 
 
@@ -25,11 +25,7 @@ export default function RootLayout({current, headerInfo, meta, children}: {
     ];
     return (
         <html lang="en">
-          {/*
-            <head /> will contain the components returned by the nearest parent
-            head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-          */}
-          <Heading title={meta ? meta.title : null} description={meta ? meta.description : null} />
+          <Head title={meta ? meta.title : null} description={meta ? meta.description : null} />
           <body>
           <Header current={current} headerInfo={headerInfo}/>
           {children}

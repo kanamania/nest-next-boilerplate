@@ -7,6 +7,7 @@ import InvestNowCategories from './homepage/InvestNowCategories';
 import Footer from './footer/footer';
 import Layout from '@/app/layout';
 import Aboutus from '@/pages/aboutus';
+import App, {AppContext} from 'next/app';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -173,19 +174,19 @@ function Home() {
       </>
   )
 }
-Home.getLayout = (page: React.ReactNode) => (
-    <Layout
-        headerInfo={{
+Home.getInitialProps = function() {
+    return {
+        headerInfo: {
             heading: 'INVESTOR',
             text: "Find investment opportunities, and invest in potential businesses right from your fingertips.",
             buttonText: "Join the platform",
             buttonLink: "#"
-        }}
-        current="home"
-        meta={{
+        },
+        current: "home",
+        meta: {
             title: "Home",
             description: "Home"
-        }}
-    >{page}</Layout>
-)
+        }
+    };
+};
 export default Home;

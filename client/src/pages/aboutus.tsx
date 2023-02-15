@@ -59,16 +59,21 @@ const Aboutus = () => {
         </>
     )
 }
-
-Aboutus.getLayout = (page: React.ReactNode) => (
-    <RootLayout headerInfo={{
-        heading: 'About Us',
-        text: "Heading description",
-        buttonText: "Click here",
-        buttonLink: "#"
-    }} current="aboutus" meta={{
-        title: "About Us",
-        description: "About Us"
-    }}>{page}</RootLayout>
-)
+export async function getStaticProps() {
+    return {
+        props: {
+            headerInfo: {
+                heading: 'About Us',
+                text: "Heading description",
+                buttonText: "Click here",
+                buttonLink: "#"
+            },
+            meta: {
+                title: "About Us",
+                description: "About Us"
+            },
+            current: 'aboutus'
+        }
+    }
+}
 export default Aboutus;
