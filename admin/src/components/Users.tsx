@@ -23,9 +23,7 @@ export const UserList = () => (
             <EmailField source="email" />
             <TextField source="phone" />
             <TextField source="type" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="first_name" />
-            </ReferenceField>
+            <TextField source="creator" />
             <DateField source="created_at" />
         </Datagrid>
     </List>
@@ -72,9 +70,7 @@ export const UserShow = () => (
             <TextField source="phone" />
             <TextField source="type" />
             <DateField source="created_at" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="first_name" />
-            </ReferenceField>
+            <TextField source="creator" />
         </SimpleShowLayout>
     </Show>
 );

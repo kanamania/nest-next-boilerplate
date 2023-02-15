@@ -17,6 +17,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { FileModule } from './module/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import './polyfill';
 
 const IMPORTED_MODULES = [
   AuthModule,

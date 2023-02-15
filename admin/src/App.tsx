@@ -23,6 +23,8 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import CategoryIcon from '@mui/icons-material/Category';
 import Crop54Icon from '@mui/icons-material/Crop54';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import FolderIcon from '@mui/icons-material/Folder';
+import {FileEdit, FileShow, FileList} from './components/File';
 // @ts-ignore
 const dataProvider = apiServer('http://localhost:9000', httpClient);
 
@@ -34,6 +36,7 @@ const App = () => (
                   edit={LocationEdit}
                   show={LocationShow}
                   hasCreate={true}
+                  hasShow={true}
                   create={LocationCreate}
                   icon={LocationOnIcon} />
         <Resource name="investments"
@@ -42,6 +45,7 @@ const App = () => (
                   edit={InvestmentEdit}
                   show={InvestmentShow}
                   hasCreate={true}
+                  hasShow={true}
                   create={InvestmentCreate}
                   icon={CurrencyExchangeIcon} />
         <Resource name="investment/areas"
@@ -51,6 +55,7 @@ const App = () => (
                   edit={InvestmentAreaEdit}
                   show={InvestmentAreaShow}
                   hasCreate={true}
+                  hasShow={true}
                   create={InvestmentAreaCreate}
                   icon={Crop54Icon} />
         <Resource name="investment/categories"
@@ -60,8 +65,16 @@ const App = () => (
                   edit={InvestmentCategoryEdit}
                   show={InvestmentCategoryShow}
                   hasCreate={true}
+                  hasShow={true}
                   create={InvestmentCategoryCreate}
                   icon={CategoryIcon} />
+        <Resource name="files"
+                  options={{label: 'File Manager'}}
+                  list={FileList}
+                  edit={FileEdit}
+                  show={FileShow}
+                  hasShow={true}
+                  icon={FolderIcon}/>
         <Resource name="users"
                   recordRepresentation={(record) => `${record.first_name} ${record.last_name}`}
                   list={UserList}
@@ -69,6 +82,7 @@ const App = () => (
                   show={UserShow}
                   create={UserCreate}
                   hasCreate={true}
+                  hasShow={true}
                   icon={UserIcon} />
     </Admin>
 );

@@ -15,17 +15,34 @@ export class UserService {
     return this.userRepository.save(this.userRepository.create(user));
   }
   async findById(id: number): Promise<UserEntity | null> {
-    return this.userRepository.findOneBy({ id });
+    return this.userRepository
+      .createQueryBuilder('User')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
+      .addSelect('User.first_name || " " || User.last_name', 'name')
+      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
+      .where('id = :id', { id })
+      .getOne();
   }
   async findByEmail(email: string): Promise<UserEntity | undefined> {
-    return this.userRepository.findOneBy({ email });
+    return this.userRepository
+      .createQueryBuilder('User')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
+      .addSelect('User.first_name || " " || User.last_name', 'name')
+      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
+      .where('email = :email', { email })
+      .getOne();
   }
   async findAll(): Promise<UserEntity[]> {
-    return this.userRepository.find();
+    return this.userRepository
+      .createQueryBuilder('User')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
+      .addSelect('User.first_name || " " || User.last_name', 'name')
+      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
+      .getMany();
   }
   async update(id: string, data: any): Promise<any> {
     return this.userRepository
-      .createQueryBuilder()
+      .createQueryBuilder('User')
       .update()
       .set({
         first_name: data.first_name,
@@ -40,7 +57,7 @@ export class UserService {
   }
   async delete(id: string): Promise<any> {
     return this.userRepository
-      .createQueryBuilder()
+      .createQueryBuilder('User')
       .update()
       .set({
         deleted_by: null,

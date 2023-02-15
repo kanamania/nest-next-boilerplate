@@ -27,6 +27,10 @@ export class FileEntity {
   type: string;
   @Column({ type: 'enum', enum: FileStateType })
   state: string;
+  @Column({ type: 'text', nullable: true })
+  record_type: string;
+  @Column('bigint', { unsigned: true, nullable: true })
+  record_id: number;
   @Column('bigint', { unsigned: true, nullable: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })

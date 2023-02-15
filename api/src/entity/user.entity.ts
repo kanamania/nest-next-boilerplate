@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VirtualColumn } from '../utils/virtualColumn';
 
 export enum UserType {
   INVESTOR = 'investor',
@@ -16,16 +17,20 @@ export class UserEntity {
   first_name: string;
   @Column({ type: 'varchar', length: 64 })
   last_name: string;
+  @VirtualColumn()
+  name: string;
   @Column({ type: 'varchar', length: 64 })
   email: string;
   @Column('bigint')
   phone: number;
-  @Column('text')
+  @Column({ type: 'text', select: false })
   password: string;
   @Column({ type: 'enum', enum: UserType })
   type: string;
   @Column({ type: 'text', nullable: true })
   avatar: string;
+  @VirtualColumn()
+  creator: string;
   @Column('bigint', { unsigned: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })
