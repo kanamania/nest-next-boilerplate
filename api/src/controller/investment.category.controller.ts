@@ -10,18 +10,18 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { InvestmentCategorieservice } from '../service/investment.category.service';
+import { InvestmentCategoryService } from '../service/investment.category.service';
 import { InvestmentCategoryEntity } from '../entity/investment.category.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
 @Controller('investment/categories')
 export class InvestmentCategoryController {
   private response: TResponse = new TResponse();
-  constructor(private investmentCategorieservice: InvestmentCategorieservice) {}
+  constructor(private investmentCategoryService: InvestmentCategoryService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() investmentCategory: InvestmentCategoryEntity) {
-    return await this.investmentCategorieservice
+    return await this.investmentCategoryService
       .create(investmentCategory)
       .then((response) => {
         console.log(response);
@@ -42,7 +42,7 @@ export class InvestmentCategoryController {
   async findAll(@Req() request: Request) {
     console.log(request.body);
     const investmentCategories: Array<InvestmentCategoryEntity> =
-      await this.investmentCategorieservice.findAll();
+      await this.investmentCategoryService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
     this.response.data = investmentCategories;
@@ -51,7 +51,7 @@ export class InvestmentCategoryController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() body: any) {
-    return await this.investmentCategorieservice
+    return await this.investmentCategoryService
       .update(id, body)
       .then((response) => {
         console.log(response);
@@ -70,7 +70,7 @@ export class InvestmentCategoryController {
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    const obj = await this.investmentCategorieservice.delete(id);
+    const obj = await this.investmentCategoryService.delete(id);
     if (!obj) {
       this.response.status = 'fail';
       this.response.message = 'Deletion fail.';
