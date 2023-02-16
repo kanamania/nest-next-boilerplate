@@ -69,19 +69,33 @@ export class FileController {
       });
   }
   @UseGuards(JwtAuthGuard)
-  @Get('all')
+  @Get()
   async findAll() {
-    const users: Array<FileEntity> = await this.fileService.findAll();
-    this.response.message = null;
-    this.response.code = 200;
-    this.response.status = 'success';
-    this.response.data = users;
-    return this.response;
+    return await this.fileService
+      .findAll()
+      .then((response: Array<FileEntity>) => {
+        this.response.message = null;
+        this.response.code = 200;
+        this.response.status = 'success';
+        this.response.data = response;
+        return this.response;
+      });
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async find(@Param('id') id: number) {
+    return await this.fileService.findById(id).then((response) => {
+      this.response.message = null;
+      this.response.code = 200;
+      this.response.status = 'success';
+      this.response.data = response;
+      return response;
+    });
   }
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    await this.fileService.delete(id).then((response) => {
+    return await this.fileService.delete(id).then((response) => {
       if (!response) {
         this.response.status = 'fail';
         this.response.message = 'Deletion fail.';

@@ -20,11 +20,9 @@ export const FileList = () => (
             <TextField source="id" />
             <ImageField source="preview" />
             <TextField source="name" />
-            <TextField source="path" />
             <TextField source="mime" />
             <NumberField source="size" />
-            <TextField source="record_type" />
-            <NumberField source="record_id" />
+            <TextField source="record_type" label="Type" />
         </Datagrid>
     </List>
 );

@@ -18,26 +18,36 @@ export class UserService {
     return this.userRepository
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
-      .addSelect('User.first_name || " " || User.last_name', 'name')
-      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
-      .where('id = :id', { id })
+      .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .where('User.id = :id', { id })
       .getOne();
   }
   async findByEmail(email: string): Promise<UserEntity | undefined> {
     return this.userRepository
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
-      .addSelect('User.first_name || " " || User.last_name', 'name')
-      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
-      .where('email = :email', { email })
+      .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .addSelect('User.password')
+      .where('User.email = :email', { email })
       .getOne();
   }
   async findAll(): Promise<UserEntity[]> {
     return this.userRepository
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
-      .addSelect('User.first_name || " " || User.last_name', 'name')
-      .addSelect('_creator.first_name || " " || _creator.last_name', 'creator')
+      .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
       .getMany();
   }
   async update(id: string, data: any): Promise<any> {
@@ -52,7 +62,7 @@ export class UserService {
         modified_by: data.modified_by,
         updated_at: new Date(),
       })
-      .where('id = :id', { id })
+      .where('User.id = :id', { id })
       .execute();
   }
   async delete(id: string): Promise<any> {
@@ -63,7 +73,7 @@ export class UserService {
         deleted_by: null,
         deleted_at: new Date(),
       })
-      .where('id = :id', { id })
+      .where('User.id = :id', { id })
       .execute();
   }
 }

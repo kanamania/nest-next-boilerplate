@@ -1,4 +1,5 @@
 import {fetchUtils, Options} from 'react-admin';
+import {authProvider} from './authProvider';
 
 export default (url: string, options = {}) => {
     const token = JSON.parse(localStorage.getItem('auth') ?? '{}').token ?? null;
@@ -7,11 +8,13 @@ export default (url: string, options = {}) => {
         if (!options.headers) {
             // @ts-ignore
             options.headers = new Headers({Accept: 'application/json'});
-            // authProvider.logout()
         }
         // @ts-ignore
         options.headers.set("Authorization", `Bearer ${token}`);
         return fetchUtils.fetchJson(url, options);
+    } else {
+        console.log('Logout');
+        authProvider.logout();
     }
     // @ts-ignore
 };

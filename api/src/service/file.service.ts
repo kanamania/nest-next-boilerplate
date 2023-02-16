@@ -25,7 +25,7 @@ export class FileService {
   async findAll(): Promise<FileEntity[] | null> {
     return this.fileRepository.find();
   }
-  async get(id: number): Promise<FileEntity | null> {
+  async findById(id: number): Promise<FileEntity | null> {
     return this.fileRepository.findOneBy({ id });
   }
   async delete(id: number): Promise<any> {
