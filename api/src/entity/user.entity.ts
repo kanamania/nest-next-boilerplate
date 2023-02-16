@@ -23,6 +23,8 @@ export class UserEntity {
   email: string;
   @Column('bigint')
   phone: number;
+  @VirtualColumn()
+  phone_number: string;
   @Column({ type: 'text', select: false })
   password: string;
   @Column({ type: 'enum', enum: UserType })

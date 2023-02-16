@@ -19,6 +19,7 @@ export class UserService {
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
       .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect('CONCAT("0",User.phone)', 'phone_number')
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
         'creator',
@@ -31,6 +32,7 @@ export class UserService {
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
       .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect('CONCAT("0",User.phone)', 'phone_number')
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
         'creator',
@@ -44,6 +46,7 @@ export class UserService {
       .createQueryBuilder('User')
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
       .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect('CONCAT("0",User.phone)', 'phone_number')
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
         'creator',
