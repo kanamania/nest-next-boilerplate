@@ -1,4 +1,10 @@
-import { Controller, Post, Body, UseFilters } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseFilters,
+  NotFoundException,
+} from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { Request } from 'express';
 import { Public } from '../utils/ispublic';
@@ -23,12 +29,11 @@ export class AuthController {
               this.response.status = 'success';
               this.response.access_token = token;
               this.response.data = user;
+              return this.response;
             });
           } else {
-            this.response.code = 403;
-            this.response.status = 'Failed';
+            throw new NotFoundException('User not found');
           }
-          return this.response;
         });
     } catch (e) {
       this.response.code = 403;
