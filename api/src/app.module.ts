@@ -18,7 +18,7 @@ import { FileModule } from './module/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import './polyfill';
-
+import { configuration } from './config/configuration';
 const IMPORTED_MODULES = [
   AuthModule,
   FileModule,
@@ -36,7 +36,9 @@ const IMPORTED_MODULES = [
     MulterModule.register({
       dest: './files',
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
     TypeOrmModule.forRoot(connectionOptions),
     PassportModule,
     ...IMPORTED_MODULES,
