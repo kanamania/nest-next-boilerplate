@@ -7,7 +7,7 @@ import { connectionOptions } from '../ormconfig';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocationModule } from './module/location.module';
 import { InvestmentModule } from './module/investment.module';
@@ -19,6 +19,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import './polyfill';
 import { configuration } from './config/configuration';
+import { AllExceptionsFilter } from './utils/all-exceptions.filter';
 const IMPORTED_MODULES = [
   AuthModule,
   FileModule,
@@ -45,6 +46,10 @@ const IMPORTED_MODULES = [
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
     AppService,
     {
       provide: APP_GUARD,
