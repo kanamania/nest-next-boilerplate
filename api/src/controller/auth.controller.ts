@@ -1,18 +1,9 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseFilters,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Post, Body, NotFoundException } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
-import { Request } from 'express';
 import { Public } from '../utils/ispublic';
 import { TResponse } from '../types/TResponse';
-import { HttpExceptionFilter } from '../utils/http-exception.filter';
 
 @Controller()
-@UseFilters(new HttpExceptionFilter())
 export class AuthController {
   private response: TResponse = new TResponse();
   constructor(private authService: AuthService) {}
