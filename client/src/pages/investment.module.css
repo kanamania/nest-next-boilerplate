@@ -1,0 +1,60 @@
+.main {
+    display: flex;
+    margin: 10px auto;
+    width: 92%;
+    gap: 47px;
+}
+.seekInvestment {
+    width: 45%;
+}
+.seekInvestmentHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+}
+.seekInvestmentTitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    height: 56.99px;
+}
+.seekInvestmentContainer {
+    border-radius: 20px;
+    background: #fff;
+    padding: 35px 38px;
+    margin-top: 20px;
+    margin-bottom: 44px;
+}
+.seekInvestmentBody {}
+.seekInvestmentGallery {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.seekInvestmentReactions {
+    display: flex;
+    flex-direction: row;
+    background: #007FFF;
+    color: #ffffff;
+    border-radius: 100px;
+    margin-top: 28px;
+}
+.seekInvestmentReactions div {
+    display: flex;
+    gap: 5px;
+    padding: 15px;
+    align-items: center;
+    width: 33%;
+    justify-content: center;
+}
+.seekInvestmentReactions div img {
+    color: #ffffff;
+}
+.seekInvestmentReactions div span {}
+.seekInvestmentReactionsLike {}
+.seekInvestmentReactionsComment {}
+.seekInvestmentReactionsShare {}

@@ -226,10 +226,17 @@
 .seekInvestmentContainer li img {
   display: flex;
 }
+.seekInvestmentListItem {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.seekInvestmentListItemImage {
+}
 .seekInvestmentListItemDetail  {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   margin-left: 5px;
 }
 .seekInvestmentListItemTop  {

@@ -16,6 +16,7 @@ function Home() {
             target: 'Tsh 5M /month',
             time: '2 hours ago',
             category: 'Livestock',
+            showReaction: true,
         },
         {
             image: '/Rectangle37.png',
@@ -23,6 +24,7 @@ function Home() {
             target: 'Tsh 10M /one time',
             time: '6 hours ago',
             category: 'Livestock',
+            showReaction: true,
         },
         {
             image: '/Rectangle38.png',
@@ -30,6 +32,7 @@ function Home() {
             target: 'USD 8,500 /month',
             time: '2 days ago',
             category: 'Mining',
+            showReaction: true,
         },
         {
             image: '/Rectangle39.png',
@@ -37,6 +40,7 @@ function Home() {
             target: 'Tsh 8M /month',
             time: '2 days ago',
             category: 'Startup Business',
+            showReaction: true,
         },
         {
             image: '/Rectangle47.png',
@@ -44,6 +48,7 @@ function Home() {
             target: 'Tsh 2.4M /month',
             time: '3 days ago',
             category: 'Startup Business',
+            showReaction: true,
         },
     ];
     const investNowCategories = [
