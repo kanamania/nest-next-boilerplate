@@ -13,6 +13,7 @@
     display: flex;
     gap: 5px;
     align-content: center;
+    align-items: center;
 }
 .socialMediaContainer {
     display: flex;

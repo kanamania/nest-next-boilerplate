@@ -1,7 +1,7 @@
 import styles from './seekinvestment.module.css'
-import SeekInvestmentList from '@/app/homepage/SeekInvestmentList';
 import Link from 'next/link';
 import Image from 'next/image';
+import SeekInvestmentList from '@/components/SeekInvestmentList';
 
 export default function Seekinvestment() {
     const seekInvestmentList = [
@@ -12,6 +12,7 @@ export default function Seekinvestment() {
             time: '2 hours ago',
             category: 'Livestock',
             showReaction: true,
+            id: 1,
         },
         {
             image: '/Rectangle37.png',
@@ -20,6 +21,7 @@ export default function Seekinvestment() {
             time: '6 hours ago',
             category: 'Livestock',
             showReaction: true,
+            id: 2,
         },
         {
             image: '/Rectangle38.png',
@@ -28,6 +30,7 @@ export default function Seekinvestment() {
             time: '2 days ago',
             category: 'Mining',
             showReaction: true,
+            id: 3,
         },
         {
             image: '/Rectangle39.png',
@@ -36,6 +39,7 @@ export default function Seekinvestment() {
             time: '2 days ago',
             category: 'Startup Business',
             showReaction: true,
+            id: 4,
         },
         {
             image: '/Rectangle47.png',
@@ -44,6 +48,7 @@ export default function Seekinvestment() {
             time: '3 days ago',
             category: 'Startup Business',
             showReaction: true,
+            id: 5,
         },
     ];
     return (
@@ -94,4 +99,21 @@ export default function Seekinvestment() {
             </main>
         </>
     )
+}
+export async function getStaticProps() {
+    return {
+        props: {
+            headerInfo: {
+                heading: 'Seek Investment',
+                text: "Heading description",
+                buttonText: "Click here",
+                buttonLink: "#"
+            },
+            meta: {
+                title: "Seek Investment",
+                description: "Seek Investment"
+            },
+            current: 'seekinvestment'
+        }
+    }
 }

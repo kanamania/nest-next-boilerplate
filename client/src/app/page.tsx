@@ -2,8 +2,8 @@
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from './page.module.css'
-import SeekInvestmentList from './homepage/SeekInvestmentList';
-import InvestNowCategories from './homepage/InvestNowCategories';
+import InvestNowCategories from '@/components/InvestNowCategories';
+import SeekInvestmentList from '@/components/SeekInvestmentList';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,6 +17,7 @@ function Home() {
             time: '2 hours ago',
             category: 'Livestock',
             showReaction: true,
+            id: 1,
         },
         {
             image: '/Rectangle37.png',
@@ -25,6 +26,7 @@ function Home() {
             time: '6 hours ago',
             category: 'Livestock',
             showReaction: true,
+            id: 2,
         },
         {
             image: '/Rectangle38.png',
@@ -33,6 +35,7 @@ function Home() {
             time: '2 days ago',
             category: 'Mining',
             showReaction: true,
+            id: 3,
         },
         {
             image: '/Rectangle39.png',
@@ -41,6 +44,7 @@ function Home() {
             time: '2 days ago',
             category: 'Startup Business',
             showReaction: true,
+            id: 4,
         },
         {
             image: '/Rectangle47.png',
@@ -49,6 +53,7 @@ function Home() {
             time: '3 days ago',
             category: 'Startup Business',
             showReaction: true,
+            id: 5,
         },
     ];
     const investNowCategories = [

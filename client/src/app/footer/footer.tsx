@@ -5,7 +5,7 @@ export default function Footer(props: { social_links: { link: string | undefined
         <>
         <footer className={styles.footerContainer}>
             <div className={styles.footerInner}>
-                <span className={styles.copyrightText}>Copyright <Image src="/copyright.svg" width={15} height={15} alt="Copyright" /> 2022 Alpha Project</span>
+                <span className={styles.copyrightText}><span>Copyright</span> <Image src="/copyright.svg" width={15} height={15} alt="Copyright" /> <span>2022 Alpha Project</span></span>
                 <div className={styles.socialMediaContainer}>
                     <ul>
                         {props.social_links.map((item: { link: string | undefined; icon: any; title: any }) => (

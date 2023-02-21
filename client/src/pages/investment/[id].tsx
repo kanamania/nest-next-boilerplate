@@ -1,4 +1,4 @@
-import styles from './investment.module.css'
+import styles from './[id].module.css';
 import InvestmentInfo from '@/components/InvestmentInfo';
 import {useEffect, useState} from 'react';
 import Image from 'next/image';

@@ -1,0 +1,91 @@
+.portalMain {
+    background: #ffffff;
+}
+.portalContainer {
+    margin: 10px auto;
+    width: 92%;
+    gap: 47px;
+}
+.portalContainer h1 {
+    padding: 26px 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 36px;
+}
+.portalCountriesList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.portalCountriesList li  {
+    margin-bottom: 23px;
+    background: #EFEFEF;
+    border-radius: 10px;
+}
+.portalCountriesList li a {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    padding-top: 37px;
+    padding-bottom: 37px;
+    padding-left: 34px;
+
+}
+.portalCountriesList li a:hover {
+    color: #141414;
+}
+.portalCountriesList li a img:first-child {
+    order: 1;
+}
+.portalCountriesList li a div{
+    order: 2;
+}
+.portalCountriesList li a img:last-child {
+    order: 3;
+    width: 10%;
+    display: flex;
+    justify-content: right;
+    padding-right: 37px;
+}
+.portalCountriesList li a div span{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.portalCountriesList li a div p{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.portalAd {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    margin-top: 129px;
+    background: #EFEFEF;
+    align-items: center;
+    justify-content: center;
+    padding-top: 59px;
+    padding-bottom: 44px;
+}
+.portalAdImage {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 50px;
+    display: block;
+}
+.portalAd span {
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+    opacity: 0.5;
+}
+.marginBottom {
+    height: 78px;
+    opacity: 0;
+}
