@@ -12,16 +12,20 @@ function Investment() {
         target: 'Tsh 10M /one time',
         showReaction: false,
     });
+    const [initial, setInitial] = useState(true);
 
     useEffect(()=> {
-        setInvestmentDetail({
-            image: '/Rectangle37.png',
-            seeker: 'Haitham Omar',
-            category: 'Livestock',
-            time: '6 hours ago',
-            target: 'Tsh 10M /one time',
-            showReaction: false,
-        })
+        if(initial) {
+            setInvestmentDetail({
+                image: '/Rectangle37.png',
+                seeker: 'Haitham Omar',
+                category: 'Livestock',
+                time: '6 hours ago',
+                target: 'Tsh 10M /one time',
+                showReaction: false,
+            });
+            setInitial(false);
+        }
     });
     return (
         <>
@@ -78,7 +82,7 @@ export async function getStaticProps() {
                 title: "Investment",
                 description: "Investment"
             },
-            current: 'seekinvesment'
+            current: 'seekinvestment'
         }
     }
 }
