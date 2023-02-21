@@ -1,0 +1,244 @@
+.main {
+    display: flex;
+    margin: 10px auto;
+    width: 92%;
+    gap: 47px;
+}
+.investmentFilter {
+    background: #CCCCCC;
+    padding: 30px 40px 37px;
+    border-radius: 20px;
+    margin-top: 110px;
+    max-height: 450px;
+}
+.investmentFilterField {
+    width: 100%;
+    max-width: 269px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.investmentFilterField label {
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+.investmentFilterField select {
+    border-radius: 10px;
+    height: 45px;
+    border: 0;
+    padding: 0 10px;
+}
+.investmentFilterFieldRange {
+    display: flex;
+    flex-direction: row;
+}
+.investmentFilterFieldRange input {
+    width: 45%;
+    border-radius: 10px;
+    height: 45px;
+    border: 0;
+}
+.investmentFilterFieldRange input:first-child {
+    order: 1;
+}
+.investmentFilterFieldRange input:last-child {
+    order: 3;
+}
+.investmentFilterFieldRange span {
+    width: 10%;
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.seekInvestment {
+    width: 35%;
+}
+.seekInvestmentHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+}
+.seekInvestmentTitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+}
+.seekInvestmentToggle {
+    display: flex;
+    margin-bottom: 12px;
+}
+.seekInvestmentToggle a {
+    width: 135px;
+    height: 45px;
+    border: 1px solid #007FFF;
+    border-radius: 100px;
+    top: 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    background: #ffffff;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.seekInvestmentToggle a:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    right: 0;
+    display: inline-flex;
+    background: #007FFF;
+    color: #ffffff;
+}
+.seekInvestmentToggle a:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    left: 0;
+    display: inline-flex;
+}
+.seekInvestmentToggle a {
+    display: inline-block;
+}
+.seekInvestmentTitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    height: 56.99px;
+}
+.seekInvestmentContainer {
+    border-radius: 20px;
+    background: #fff;
+    padding: 35px 38px;
+}
+.seekInvestmentContainerBanner {
+    max-width: 100%;
+    max-height: 260px;
+    background-image: url("/Rectangle43t.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.seekInvestmentContainerBanner span{
+    color: #fff;
+    width: 60%;
+    padding-left: 37px;
+    padding-top: 48px;
+    padding-bottom: 40px;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+}
+.seekInvestmentContainerBanner button{
+    width: 125px;
+    height: 35px;
+
+    background: #FFFFFF;
+    border: 2px solid #007FFF;
+    border-radius: 100px;
+    float:right;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+.seekInvestmentList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.seekInvestmentContainer li {
+    display: flex;
+    margin-bottom: 32px;
+}
+.seekInvestmentContainer li:last-child {
+    margin-bottom: 0;
+}
+.seekInvestmentContainer li img {
+    display: flex;
+}
+.seekInvestmentListItemDetail  {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 5px;
+}
+.seekInvestmentListItemTop  {
+    display: inline-flex;
+    justify-content: space-between;
+}
+.seekInvestmentListItemLeft  {
+    display: flex;
+    flex-direction: column;
+}
+.seekInvestmentListItemRight  {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.seekInvestmentListItemBottom  {
+    display: flex;
+    gap: 42px;
+    margin-top: 5px;
+}
+.seekInvestmentListItemName  {
+    display: block;
+    margin-bottom: 10px;
+}
+.seekInvestmentListItemTarget  {
+    display: block;
+}
+.seekInvestmentListItemLove  {
+    display: inline-block;
+
+}
+.seekInvestmentListItemShare  {
+    display: inline-block;
+}
+.seekInvestmentListItemDialog  {
+    display: inline-block;
+}
+.seekInvestmentListItemTime  {
+    display: inline-block;
+}
+.seekInvestmentListItemCategory  {
+    display: inline-block;
+}
+.seekInvestmentBottom {
+    border-radius: 20px;
+    background: #ffffff;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 63px 0;
+    margin-bottom: 130px;
+}
+.seekInvestmentBottomLoginLink {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+.seekInvestmentBottomLoginLink span {
+
+}
+.seekInvestmentBottomLoginLink img {}

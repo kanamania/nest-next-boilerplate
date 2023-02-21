@@ -1,33 +1,81 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 
-@Catch()
-export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost) {}
+export class BusinessException extends Error {
+  public readonly id: string;
+  public readonly timestamp: Date;
 
-  catch(exception: unknown, host: ArgumentsHost): void {
-    // In certain situations `httpAdapter` might not be available in the
-    // constructor method, thus we should resolve it here.
-    const { httpAdapter } = this.httpAdapterHost;
+  constructor(
+    public readonly message: string,
+    public readonly apiMessage: string,
+    public readonly status: HttpStatus,
+  ) {
+    super(message);
+    this.id = BusinessException.genId();
+    this.timestamp = new Date();
+  }
+
+  private static genId(length = 16): string {
+    const p = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return [...Array(length)].reduce(
+      (a) => a + p[~~(Math.random() * p.length)],
+      '',
+    );
+  }
+}
+export interface ApiError {
+  id: string;
+  message: string;
+  timestamp: Date;
+}
+
+@Catch(Error)
+export class CustomExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(CustomExceptionFilter.name);
+
+  catch(exception: Error, host: ArgumentsHost) {
+    let body: ApiError;
+    let status: HttpStatus;
+
+    if (exception instanceof HttpException) {
+      // We can extract internal message & status from NestJS errors
+      // Useful with class-validator
+      body = new BusinessException(
+        exception.message,
+        exception.message, // Or generic message if you like
+        exception.getStatus(),
+      );
+      status = exception.getStatus();
+    } else {
+      // For all other exceptions simply return 500 error
+      body = new BusinessException(
+        `Internal error occurred: ${exception.message}`,
+        'Internal error occurred',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+      status = HttpStatus.INTERNAL_SERVER_ERROR;
+    }
 
     const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
 
-    const httpStatus =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
-    console.log(httpAdapter);
-    const responseBody = {
-      statusCode: httpStatus,
-      timestamp: new Date().toISOString(),
-      path: httpAdapter.getRequestUrl(ctx.getRequest()),
-    };
+    // Logs will contain an error identifier as well as
+    // request path where it has occurred
+    this.logger.error(
+      `Got an exception: ${JSON.stringify({
+        path: request.url,
+        ...body,
+      })}`,
+    );
 
-    httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+    response.status(status).json(body);
   }
 }

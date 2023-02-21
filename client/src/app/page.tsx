@@ -4,10 +4,6 @@ import { Inter } from '@next/font/google'
 import styles from './page.module.css'
 import SeekInvestmentList from './homepage/SeekInvestmentList';
 import InvestNowCategories from './homepage/InvestNowCategories';
-import Footer from './footer/footer';
-import Layout from '@/app/layout';
-import Aboutus from '@/pages/aboutus';
-import App, {AppContext} from 'next/app';
 
 
 const inter = Inter({ subsets: ['latin'] })

@@ -10,26 +10,18 @@ export class AuthController {
   @Public()
   @Post('auth/login')
   async login(@Body() req: { username?: any; email?: any; password: any }) {
-    try {
-      return this.authService
-        .validateUser(req.email ?? req.username, req.password)
-        .then((user) => {
-          if (user != null) {
-            this.authService.login(user).then((token) => {
-              this.response.code = 201;
-              this.response.status = 'success';
-              this.response.access_token = token;
-              this.response.data = user;
-              return this.response;
-            });
-          } else {
-            throw new NotFoundException('User not found');
-          }
-        });
-    } catch (e) {
-      this.response.code = 403;
-      this.response.status = 'Failed';
-      return this.response;
-    }
+    return this.authService
+      .validateUser(req.email ?? req.username, req.password)
+      .then((user) => {
+        if (user != null) {
+          this.authService.login(user).then((token) => {
+            this.response.code = 201;
+            this.response.status = 'success';
+            this.response.access_token = token;
+            this.response.data = user;
+            return this.response;
+          });
+        }
+      });
   }
 }

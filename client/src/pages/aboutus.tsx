@@ -1,5 +1,4 @@
 import styles from "./aboutus.module.css"
-import RootLayout from '../app/layout';
 import Image from 'next/image';
 const Aboutus = () => {
     return (

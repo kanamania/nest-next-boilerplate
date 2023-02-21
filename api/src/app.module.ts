@@ -19,7 +19,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import './polyfill';
 import { configuration } from './config/configuration';
-import { AllExceptionsFilter } from './utils/all-exceptions.filter';
+
 const IMPORTED_MODULES = [
   AuthModule,
   FileModule,
@@ -46,10 +46,10 @@ const IMPORTED_MODULES = [
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: AllExceptionsFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: AllExceptionsFilter,
+    // },
     AppService,
     {
       provide: APP_GUARD,
