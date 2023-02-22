@@ -75,7 +75,6 @@ export class CustomExceptionFilter implements ExceptionFilter {
         ...body,
       })}`,
     );
-
     response.status(status).json(body);
   }
 }

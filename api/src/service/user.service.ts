@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { UserEntityRepository } from '../repository/userEntityRepository';
 import { Encrypt } from '../utils/encrypt';
+import { QueryFailedError } from 'typeorm';
 @Injectable()
 export class UserService {
   constructor(
@@ -15,17 +16,26 @@ export class UserService {
     return this.userRepository.save(this.userRepository.create(user));
   }
   async findById(id: number): Promise<UserEntity | null> {
-    return this.userRepository
-      .createQueryBuilder('User')
-      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
-      .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
-      .addSelect('CONCAT("0",User.phone)', 'phone_number')
-      .addSelect(
-        'CONCAT(_creator.first_name, " ", _creator.last_name)',
-        'creator',
-      )
-      .where('User.id = :id', { id })
-      .getOne();
+    try {
+      return this.userRepository
+        .createQueryBuilder('User')
+        .leftJoinAndSelect(
+          UserEntity,
+          '_creator',
+          '_creator.id=User.created_by',
+        )
+        .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+        .addSelect('CONCAT("0",User.phone)', 'phone_number')
+        .addSelect(
+          'CONCAT(_creator.first_name, " ", _creator.last_name)',
+          'creator',
+        )
+        .where('User.id = :id', { id })
+        .getOne();
+    } catch (e) {
+      console.log(e);
+      throw QueryFailedError;
+    }
   }
   async findByEmail(email: string): Promise<UserEntity | undefined> {
     return this.userRepository
