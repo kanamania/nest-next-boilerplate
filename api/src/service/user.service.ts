@@ -16,26 +16,17 @@ export class UserService {
     return this.userRepository.save(this.userRepository.create(user));
   }
   async findById(id: number): Promise<UserEntity | null> {
-    try {
-      return this.userRepository
-        .createQueryBuilder('User')
-        .leftJoinAndSelect(
-          UserEntity,
-          '_creator',
-          '_creator.id=User.created_by',
-        )
-        .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
-        .addSelect('CONCAT("0",User.phone)', 'phone_number')
-        .addSelect(
-          'CONCAT(_creator.first_name, " ", _creator.last_name)',
-          'creator',
-        )
-        .where('User.id = :id', { id })
-        .getOne();
-    } catch (e) {
-      console.log(e);
-      throw QueryFailedError;
-    }
+    return this.userRepository
+      .createQueryBuilder('User')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
+      .addSelect('CONCAT(User.first_name, " ",User.last_name)', 'name')
+      .addSelect('CONCAT("0",User.phone)', 'phone_number')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .where('User.id = :id', { id })
+      .getOne();
   }
   async findByEmail(email: string): Promise<UserEntity | undefined> {
     return this.userRepository

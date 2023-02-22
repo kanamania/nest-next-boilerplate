@@ -13,12 +13,14 @@ export class AuthController {
     return this.authService
       .validateUser(req.email ?? req.username, req.password)
       .then((user) => {
+        console.log({ login: user });
         if (user != null) {
           this.authService.login(user).then((token) => {
             this.response.code = 201;
             this.response.status = 'success';
             this.response.access_token = token;
             this.response.data = user;
+            console.log({ login_response: this.response });
             return this.response;
           });
         }
