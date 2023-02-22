@@ -100,6 +100,7 @@ services:
       - ./api:/var/www/html/api
       - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
+      - ./.env:/var/www/html/client/.env
     ports:
       - 666:666
     working_dir: /var/www/html/client
@@ -135,6 +136,7 @@ services:
       - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
       - /home/developer/.config/refine-update-notifier-nodejs/config.json:/~/.config/refine-update-notifier-nodejs/config.json
+      - ./.env:/var/www/html/admin/.env
     ports:
       - 999:999
     working_dir: /var/www/html/admin
