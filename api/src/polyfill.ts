@@ -1,5 +1,6 @@
 import { SelectQueryBuilder } from 'typeorm';
 import { VIRTUAL_COLUMN_KEY } from './utils/virtualColumn';
+import 'reflect-metadata';
 
 declare module 'typeorm' {
   interface SelectQueryBuilder<Entity> {

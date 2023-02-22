@@ -59,7 +59,7 @@ export class CustomExceptionFilter implements ExceptionFilter {
       console.log({ exception });
       body = new BusinessException(
         `Internal error occurred: ${exception.message}`,
-        `Internal error occurred: ${exception.message}`,
+        `Internal error occurred`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
       status = HttpStatus.INTERNAL_SERVER_ERROR;
