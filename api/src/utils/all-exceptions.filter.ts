@@ -53,8 +53,10 @@ export class CustomExceptionFilter implements ExceptionFilter {
         exception.getStatus(),
       );
       status = exception.getStatus();
+      console.log({ exception });
     } else {
       // For all other exceptions simply return 500 error
+      console.log({ exception });
       body = new BusinessException(
         `Internal error occurred: ${exception.message}`,
         `Internal error occurred: ${exception.message}`,
