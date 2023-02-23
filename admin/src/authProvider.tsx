@@ -2,7 +2,7 @@ import Configs from '../configs';
 
 export const authProvider = {
     login: async (data: {email: string, password: string}) => {
-        await fetch(`${Configs.API_URL}/auth/login`, {
+        await fetch(`${Configs.API_URL}/admin/login`, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),

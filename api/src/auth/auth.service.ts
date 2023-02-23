@@ -16,7 +16,30 @@ export class AuthService {
       return null;
     }
     const user: UserEntity = await this.usersService.findByEmail(email);
-    if (user != null) {
+    if (user != null && !['admin', 'webmaster'].includes(user.type)) {
+      const check = await Encrypt.comparePassword(pass, user.password);
+      if (check) {
+        const {
+          password,
+          created_at,
+          created_by,
+          modified_by,
+          updated_at,
+          deleted_at,
+          deleted_by,
+          ...result
+        } = user;
+        return result;
+      }
+    }
+    return null;
+  }
+  async validateAdmin(email: any, pass: any) {
+    if (!email || !pass) {
+      return null;
+    }
+    const user: UserEntity = await this.usersService.findByEmail(email);
+    if (user != null && ['admin', 'webmaster'].includes(user.type)) {
       const check = await Encrypt.comparePassword(pass, user.password);
       if (check) {
         const {
