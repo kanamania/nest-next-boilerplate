@@ -19,6 +19,7 @@ export class AuthController {
             this.response.code = 201;
             this.response.status = 'success';
             this.response.access_token = token;
+            this.response.message = 'Login successful';
             this.response.data = user;
             return this.response;
           });
@@ -42,6 +43,7 @@ export class AuthController {
             this.response.code = 201;
             this.response.status = 'success';
             this.response.access_token = token;
+            this.response.message = 'Login successful';
             this.response.data = user;
             return this.response;
           });
