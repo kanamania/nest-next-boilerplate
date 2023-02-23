@@ -100,7 +100,7 @@ services:
       - ./api:/var/www/html/api
       - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
-      - ./.env:/var/www/html/client/.env
+      - ./.env.example:/var/www/html/client/.env
     ports:
       - 666:666
     working_dir: /var/www/html/client
@@ -118,7 +118,7 @@ services:
       - ./api:/var/www/html/api
       - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
-      - ./.env:/var/www/html/api/.env
+      - ./.env.example:/var/www/html/api/.env
     ports:
       - 333:333
     working_dir: /var/www/html/api
@@ -135,8 +135,7 @@ services:
       - ./api:/var/www/html/api
       - ./client:/var/www/html/client
       - ./admin:/var/www/html/admin
-      - /home/developer/.config/refine-update-notifier-nodejs/config.json:/~/.config/refine-update-notifier-nodejs/config.json
-      - ./.env:/var/www/html/admin/.env
+      - ./.env.example:/var/www/html/admin/.env
     ports:
       - 999:999
     working_dir: /var/www/html/admin
