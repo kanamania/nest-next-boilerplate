@@ -7,9 +7,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalFilters(new CustomExceptionFilter());
   app
-    .listen(process.env.PORT)
+    .listen(process.env.API_PORT)
     .then(() => {
-      console.log('successfully stared on port ' + process.env.PORT);
+      console.log('successfully stared on port ' + process.env.API_PORT);
     })
     .catch((error) => {
       console.log('bootstrap error');
