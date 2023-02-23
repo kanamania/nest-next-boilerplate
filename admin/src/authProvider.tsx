@@ -1,6 +1,8 @@
+import Configs from '../configs';
+
 export const authProvider = {
     login: async (data: {email: string, password: string}) => {
-        await fetch('http://localhost:9000/auth/login', {
+        await fetch(`${Configs.API_URL}/auth/login`, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),

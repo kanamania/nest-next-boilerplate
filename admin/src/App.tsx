@@ -25,8 +25,9 @@ import Crop54Icon from '@mui/icons-material/Crop54';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FolderIcon from '@mui/icons-material/Folder';
 import {FileEdit, FileShow, FileList} from './components/File';
+import Configs from '../configs';
 // @ts-ignore
-const dataProvider = apiServer('http://localhost:9000', httpClient);
+const dataProvider = apiServer(Configs.API_URL, httpClient);
 
 const App = () => (
     <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard}>
