@@ -26,11 +26,12 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FolderIcon from '@mui/icons-material/Folder';
 import {FileEdit, FileShow, FileList} from './components/File';
 import Configs from '../configs';
+import {MainMenu} from './utils/Menu';
 // @ts-ignore
 const dataProvider = apiServer(Configs.API_URL, httpClient);
 
 const App = () => (
-    <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard}>
+    <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} menu={MainMenu}>
         <Resource name="locations"
                   recordRepresentation={(record) => `${record.name}`}
                   list={LocationList}
