@@ -1,3 +1,3 @@
 export default class Configs {
-    static API_URL: string = 'http://localhost:1000';
+    static API_URL: string = 'http://localhost:9000';
 }
