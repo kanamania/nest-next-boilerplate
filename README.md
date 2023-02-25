@@ -1,10 +1,10 @@
-# Boilerplate for Nestjs, Nextjs, Refine, MySQL, Redis, Mailhog and PHPMyAdmin
+## Boilerplate for Nest.js, Next.js and React-Admin
 
-## Features
+### Features
 
-- API - Nestjs
-- Admin - Refine+Nextjs
-- Client - Nextjs
+- API - Nest.js
+- Admin - React-Admin
+- Client - Next.js
 - Database - MySQL
 - Cache - Redis
 - Webserver - Nginx
@@ -23,7 +23,7 @@ To start the services run \
 To stop the services run \
 `docker-compose stop` or `docker compose stop`
 
-## Screenshots
+### Screenshots
 Coming soon
-## Demo
+### Demo
 Coming soon
