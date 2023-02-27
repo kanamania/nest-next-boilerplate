@@ -43,7 +43,7 @@ export class InvestmentController {
       await this.investmentService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
-    this.response.data = investments;
+    this.response.data = investments ?? [];
     return this.response;
   }
   @UseGuards(JwtAuthGuard)

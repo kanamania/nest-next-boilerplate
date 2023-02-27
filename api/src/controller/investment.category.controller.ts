@@ -45,7 +45,7 @@ export class InvestmentCategoryController {
       await this.investmentCategoryService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
-    this.response.data = investmentCategories;
+    this.response.data = investmentCategories ?? [];
     return this.response;
   }
   @UseGuards(JwtAuthGuard)

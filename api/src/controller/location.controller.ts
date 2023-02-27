@@ -61,7 +61,7 @@ export class LocationController {
       await this.locationService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
-    this.response.data = locations;
+    this.response.data = locations ?? [];
     return this.response;
   }
   @UseGuards(JwtAuthGuard)

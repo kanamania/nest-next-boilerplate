@@ -77,7 +77,7 @@ export class FileController {
         this.response.message = null;
         this.response.code = 200;
         this.response.status = 'success';
-        this.response.data = response;
+        this.response.data = response ?? [];
         return this.response;
       });
   }
