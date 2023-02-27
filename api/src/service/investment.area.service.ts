@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InvestmentAreaEntity } from '../entity/investment.area.entity';
 import { InvestmentAreaEntityRepository } from '../repository/investmentAreaEntityRepository';
+import { InvestmentEntity } from '../entity/investment.entity';
+import { UserEntity } from '../entity/user.entity';
 @Injectable()
 export class InvestmentAreaService {
   constructor(
@@ -17,10 +19,33 @@ export class InvestmentAreaService {
     );
   }
   async findById(id: number): Promise<InvestmentAreaEntity | null> {
-    return this.investmentAreaRepository.findOneBy({ id });
+    return this.investmentAreaRepository
+      .createQueryBuilder('InvestmentArea')
+      .leftJoinAndSelect(
+        UserEntity,
+        '_creator',
+        '_creator.id=InvestmentArea.created_by',
+      )
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .where('InvestmentArea.id = :id', { id })
+      .getOne();
   }
   async findAll(): Promise<InvestmentAreaEntity[]> {
-    return this.investmentAreaRepository.find();
+    return this.investmentAreaRepository
+      .createQueryBuilder('InvestmentArea')
+      .leftJoinAndSelect(
+        UserEntity,
+        '_creator',
+        '_creator.id=InvestmentArea.created_by',
+      )
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .getMany();
   }
   async update(id: string, data: any): Promise<any> {
     return this.investmentAreaRepository

@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FileEntity } from '../entity/file.entity';
 import { FileEntityRepository } from '../repository/fileEntityRepository';
 import { fileType } from '../utils/fileType';
+import { InvestmentEntity } from '../entity/investment.entity';
+import { UserEntity } from '../entity/user.entity';
 @Injectable()
 export class FileService {
   constructor(
@@ -22,11 +24,26 @@ export class FileService {
       created_by: user.id,
     });
   }
-  async findAll(): Promise<FileEntity[] | null> {
-    return this.fileRepository.find();
-  }
   async findById(id: number): Promise<FileEntity | null> {
-    return this.fileRepository.findOneBy({ id });
+    return this.fileRepository
+      .createQueryBuilder('File')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=File.created_by')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .where('File.id = :id', { id })
+      .getOne();
+  }
+  async findAll(): Promise<FileEntity[]> {
+    return this.fileRepository
+      .createQueryBuilder('File')
+      .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=File.created_by')
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .getMany();
   }
   async delete(id: number): Promise<any> {
     return this.fileRepository
@@ -37,6 +54,14 @@ export class FileService {
         deleted_at: new Date(),
       })
       .where('id = :id', { id })
+      .execute();
+  }
+  async updateRecordInfo(obj: any): Promise<any> {
+    return this.fileRepository
+      .createQueryBuilder()
+      .update()
+      .set({ record_type: obj.constructor.name, record_id: obj.id })
+      .where('id = :id', { id: obj.banner })
       .execute();
   }
   async update(id: number, file, user): Promise<any> {

@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InvestorEntity } from '../entity/investor.entity';
 import { InvestorEntityRepository } from '../repository/investorEntityRepository';
+import { InvestmentEntity } from '../entity/investment.entity';
+import { UserEntity } from '../entity/user.entity';
 
 @Injectable()
 export class InvestorService {
@@ -17,10 +19,33 @@ export class InvestorService {
   }
 
   async findById(id: number): Promise<InvestorEntity | null> {
-    return this.investorRepository.findOneBy({ id });
+    return this.investorRepository
+      .createQueryBuilder()
+      .leftJoinAndSelect(
+        UserEntity,
+        '_creator',
+        '_creator.id=Investor.created_by',
+      )
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .where('Investor.id = :id', { id })
+      .getOne();
   }
   async findAll(): Promise<InvestorEntity[]> {
-    return this.investorRepository.find();
+    return this.investorRepository
+      .createQueryBuilder('Investor')
+      .leftJoinAndSelect(
+        UserEntity,
+        '_creator',
+        '_creator.id=Investor.created_by',
+      )
+      .addSelect(
+        'CONCAT(_creator.first_name, " ", _creator.last_name)',
+        'creator',
+      )
+      .getMany();
   }
 
   async update(id: string, data: any): Promise<any> {
