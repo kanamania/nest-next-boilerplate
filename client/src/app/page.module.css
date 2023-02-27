@@ -184,7 +184,7 @@
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.4;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -192,8 +192,8 @@
   color: #fff;
   width: 60%;
   padding-left: 37px;
-  padding-top: 48px;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: inline-block;
   font-weight: 300;
   font-size: 15px;
