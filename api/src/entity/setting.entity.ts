@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VirtualColumn } from '../utils/virtualColumn';
 
 export enum SettingType {
   COUNTRY = 'country',
@@ -23,6 +24,8 @@ export class SettingEntity {
   value_current: string;
   @Column({ type: 'text', nullable: true })
   value_default: string;
+  @VirtualColumn()
+  creator: string;
   @Column('bigint', { unsigned: true, nullable: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })

@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VirtualColumn } from '../utils/virtualColumn';
 
 export enum FileStateType {
   BAD = 'bad',
@@ -31,6 +32,8 @@ export class FileEntity {
   record_type: string;
   @Column('bigint', { unsigned: true, nullable: true })
   record_id: number;
+  @VirtualColumn()
+  creator: string;
   @Column('bigint', { unsigned: true, nullable: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })
