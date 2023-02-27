@@ -13,10 +13,11 @@ import {
     SimpleShowLayout,
     Create, SelectInput, required, ImageField, ImageInput
 } from 'react-admin';
+import ActionColumn from '../utils/ActionColumn';
 
 export const InvestmentAreaList = () => (
     <List>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <ImageField source="banner" />
             <TextField source="name" />
@@ -25,6 +26,7 @@ export const InvestmentAreaList = () => (
                 <TextField source="name" />
             </ReferenceField>
             <DateField source="created_at" />
+            <ActionColumn source="action"/>
         </Datagrid>
     </List>
 );

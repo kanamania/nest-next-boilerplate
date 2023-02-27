@@ -13,18 +13,20 @@ import {
     SimpleShowLayout,
     Create, SelectInput, required
 } from 'react-admin';
+import ActionColumn from '../utils/ActionColumn';
 
 export const UserList = () => (
     <List>
-        <Datagrid rowClick="edit">
-            <TextField source="id" />
+        <Datagrid rowClick="show">
+            <TextField source="id" label="" />
             <TextField source="first_name" />
             <TextField source="last_name" />
             <EmailField source="email" />
-            <TextField source="phone_number" />
+            <TextField source="phone_number" label="Phone" />
             <TextField source="type" />
             <TextField source="creator" />
-            <DateField source="created_at" />
+            <DateField source="created_at" label="Created" />
+            <ActionColumn source="action" label="" />
         </Datagrid>
     </List>
 );

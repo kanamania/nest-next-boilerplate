@@ -1,3 +1,27 @@
 body {
   margin: 0;
 }
+.AppTitle {}
+.AppTitleSpacer {
+  width: 10px;
+}
+.row_action_toolbar {
+  width: 10%;
+}
+.column-action {
+  width: 10%;
+}
+.column-action div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.column-action div a, .column-action div button {
+  min-width: 28px;
+  width: 28px;
+  display: inline-flex;
+}
+.column-action div a span, .column-action div button span {
+  margin: 0;
+}

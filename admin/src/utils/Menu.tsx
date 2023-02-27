@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Menu } from 'react-admin';
 
 import BookIcon from '@mui/icons-material/Book';
-import PeopleIcon from '@mui/icons-material/People';
-import LabelIcon from '@mui/icons-material/Label';
 import SubMenu from './SubMenu';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Crop54Icon from '@mui/icons-material/Crop54';
@@ -11,6 +9,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import FolderIcon from '@mui/icons-material/Folder';
 import UserIcon from '@mui/icons-material/Group';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import TuneIcon from '@mui/icons-material/Tune';
 
 export const MainMenu = () => (
     <Menu>
@@ -22,6 +21,7 @@ export const MainMenu = () => (
             <Menu.Item to="investment/areas" primaryText="Investment Areas" leftIcon={<Crop54Icon />}/>
             <Menu.Item to="investment/categories" primaryText="Investment Categories" leftIcon={<CategoryIcon />}/>
             <Menu.Item to="files" primaryText="Files" leftIcon={<FolderIcon />}/>
+            <Menu.Item to="settings" primaryText="Configurations" leftIcon={<TuneIcon />}/>
         </SubMenu>
     </Menu>
 );

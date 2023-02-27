@@ -13,16 +13,18 @@ import {
     SimpleShowLayout,
     Create, SelectInput, required, ImageField, ImageInput, SelectField, NumberField
 } from 'react-admin';
+import ActionColumn from '../utils/ActionColumn';
 
 export const FileList = () => (
     <List>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <ImageField source="preview" />
             <TextField source="name" />
             <TextField source="mime" />
             <NumberField source="size" />
             <TextField source="record_type" label="Type" />
+            <ActionColumn source="action"/>
         </Datagrid>
     </List>
 );
