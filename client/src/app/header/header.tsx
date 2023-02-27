@@ -1,9 +1,17 @@
 import styles from './header.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
+import {useEffect, useState} from 'react';
 
 export default function Header(props: {current: string, headerInfo: {heading: any, text: any, buttonText: any, buttonLink: any}}) {
-    return (
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+        return (
         <header className={styles.headerContainer}>
             <div className={styles.menuBar}>
                 <div className={styles.brand}>

@@ -1,7 +1,15 @@
 import styles from "./aboutus.module.css"
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
+import Home from '@/app/page';
 const Aboutus = () => {
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
 
     return (
         <main className={styles.aboutMain}>
@@ -10,7 +18,7 @@ const Aboutus = () => {
                 <p>Sed in tristique vulputate sit. Tempus massa felis nisl habitasse neque tellus semper. Tempus ultrices eget id mauris. Mauris nisi praesent at mauris rhoncus nec leo pulvinar suspendisse. Ut massa viverra erat sodales dolor. At mauris egestas porttitor placerat. </p>
             </div>
             <div className={styles.aboutMiddleContainer}>
-                <Image alt="." width={1322} height={321} src="/Rectangle46.jpg"  />
+                <Image alt="." width={1322} height={321} src="/Rectangle46.jpg" priority={true} />
             </div>
             <div className={styles.aboutBottomContainer}>
                 <div className={styles.aboutBottomContainerFirst}>
@@ -58,6 +66,10 @@ const Aboutus = () => {
         </main>
     )
 }
+Aboutus.meta = {
+    title: "About Us",
+    description: "About Us"
+};
 export async function getStaticProps() {
     return {
         props: {

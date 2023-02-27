@@ -28,7 +28,14 @@ function Investment() {
             setInitial(false);
         }
     });
-    return (
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+        return (
             <main className={styles.main}>
                 <div className={styles.seekInvestment}>
                     <div className={styles.seekInvestmentHeading}>

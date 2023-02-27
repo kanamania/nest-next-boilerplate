@@ -2,6 +2,7 @@ import styles from './seekinvestment.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import {useEffect, useState} from 'react';
 const SeekInvestmentList = dynamic(() => import('@/components/SeekInvestmentList'), { ssr: false })
 
 export default function Seekinvestment() {
@@ -52,7 +53,14 @@ export default function Seekinvestment() {
             id: 5,
         },
     ];
-    return (
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+        return (
             <main className={styles.main}>
                 <div className={styles.investmentFilter}>
                     <form>

@@ -144,8 +144,16 @@ function Home() {
                 button_link: '#',
             },
         ]);
-    },[])
-  return (
+    },[]);
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+
+        return (
           <main className={styles.main}>
               <div className={styles.investNow}>
               <div className={styles.investNowHeading}>
@@ -185,19 +193,15 @@ function Home() {
           </main>
   )
 }
-Home.getInitialProps = function() {
-    return {
-        headerInfo: {
-            heading: 'INVESTOR',
-            text: "Find investment opportunities, and invest in potential businesses right from your fingertips.",
-            buttonText: "Join the platform",
-            buttonLink: "#"
-        },
-        current: "home",
-        meta: {
-            title: "Home",
-            description: "Home"
-        }
-    };
+Home.meta = {
+    title: "Home",
+    description: "Home"
 };
+Home.headerInfo = {
+    heading: 'INVESTOR',
+    text: "Find investment opportunities, and invest in potential businesses right from your fingertips.",
+    buttonText: "Join the platform",
+    buttonLink: "#"
+};
+Home.current = "home";
 export default Home;

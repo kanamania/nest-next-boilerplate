@@ -7,8 +7,8 @@ const Footer = dynamic(() => import('@/app/footer/footer'), {ssr: false})
 
 import {useEffect, useState} from 'react';
 
-export default function RootLayout({current, headerInfo, meta, children}: {
-    children: React.ReactNode, current: string, headerInfo: { heading: any, text: any, buttonText: any, buttonLink: any }, meta: { title: string, description: string }
+export default function RootLayout({current, headerInfo, children}: {
+    children: React.ReactNode, current: string, headerInfo: { heading: any, text: any, buttonText: any, buttonLink: any }
 }) {
     const [socialMediaLinks, setSocialMediaLinks] = useState([]);
     const [initial, setInitial] = useState(true);
@@ -43,14 +43,17 @@ export default function RootLayout({current, headerInfo, meta, children}: {
         setSocialMediaLinks(links);
         setInitial(false);
     }, []);
-    return (
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return <html><body>{}</body></html>;
+    else
+
+        return (
         <html lang="en">
-        <head>
-            <meta content="width=device-width, initial-scale=1" name="viewport"/>
-            <meta name="description" content={meta ? meta.description : ""}/>
-            <link rel="icon" href="/favicon.ico"/>
-            <title>{meta ? meta.title : ""} | Alpha Project</title>
-        </head>
+        <head />
         <body>
         <Header current={current} headerInfo={headerInfo}/>
         {children}
