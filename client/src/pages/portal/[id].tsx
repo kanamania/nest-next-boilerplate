@@ -69,7 +69,6 @@ const PortalCountryPage = () => {
         },
     ]);
     return (
-        <>
             <main className={styles.portalMain}>
                 <div className={styles.portalContainer}>
                     <div className={styles.breadcrumbs}>
@@ -85,11 +84,9 @@ const PortalCountryPage = () => {
                         <div className={styles.portalSidebar}>
                             <ul>
                                 {sidebarMenu.map((item: any, index: number) => (
-                                    <>
                                         <li key={index}>
                                             <Link href="#">{item.title}</Link>
                                         </li>
-                                    </>
                                     ))}
                             </ul>
                         </div>
@@ -152,7 +149,6 @@ const PortalCountryPage = () => {
                                 <p className={styles.portalSubSectionBody}>
                                     <ul className={styles.fancyList}>
                                         {nicheList.map((item: any, index: number) => (
-                                            <>
                                             <li key={index}>
                                                 <div>
                                                     <span className={styles.outerBorder}>
@@ -164,7 +160,6 @@ const PortalCountryPage = () => {
                                                     <p dangerouslySetInnerHTML={{ __html: item.body }}></p>
                                                 </div>
                                             </li>
-                                            </>
                                         ))}
                                     </ul>
                                 </p>
@@ -173,7 +168,6 @@ const PortalCountryPage = () => {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 

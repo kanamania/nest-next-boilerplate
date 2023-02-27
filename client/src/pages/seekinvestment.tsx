@@ -1,7 +1,8 @@
 import styles from './seekinvestment.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
-import SeekInvestmentList from '@/components/SeekInvestmentList';
+import dynamic from 'next/dynamic';
+const SeekInvestmentList = dynamic(() => import('@/components/SeekInvestmentList'), { ssr: false })
 
 export default function Seekinvestment() {
     const seekInvestmentList = [
@@ -52,7 +53,6 @@ export default function Seekinvestment() {
         },
     ];
     return (
-        <>
             <main className={styles.main}>
                 <div className={styles.investmentFilter}>
                     <form>
@@ -97,7 +97,6 @@ export default function Seekinvestment() {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 export async function getStaticProps() {

@@ -49,13 +49,11 @@ export const countries = [
 export default function Portal() {
     const [countriesList, setCountriesList] = useState(countries);
     return (
-        <>
             <main className={styles.portalMain}>
                 <div className={styles.portalContainer}>
                     <h1>Information Portal</h1>
                     <ul className={styles.portalCountriesList}>
                         {countriesList.map((item: any, index: number) => (
-                        <>
                         <li key={index}>
                             <Link href={item.url}>
                                 <Image src={item.flag} alt='.' width={80} height={58} />
@@ -66,7 +64,6 @@ export default function Portal() {
                                 <Image src="/caret-right.svg" alt="." width={20} height={30} />
                             </Link>
                         </li>
-                        </>
                         ))}
                     </ul>
                     <div className={styles.portalAd}>
@@ -76,6 +73,5 @@ export default function Portal() {
                     <div className={styles.marginBottom}></div>
                 </div>
             </main>
-        </>
     )
 }

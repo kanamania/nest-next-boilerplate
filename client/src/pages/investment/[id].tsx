@@ -1,7 +1,8 @@
 import styles from './[id].module.css';
-import InvestmentInfo from '@/components/InvestmentInfo';
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const InvestmentInfo = dynamic(() => import('@/components/InvestmentInfo'), { ssr: false })
 
 function Investment() {
     const [investmentDetail, setInvestmentDetail] = useState<object|null>({
@@ -28,7 +29,6 @@ function Investment() {
         }
     });
     return (
-        <>
             <main className={styles.main}>
                 <div className={styles.seekInvestment}>
                     <div className={styles.seekInvestmentHeading}>
@@ -66,7 +66,6 @@ function Investment() {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 export async function getStaticProps() {

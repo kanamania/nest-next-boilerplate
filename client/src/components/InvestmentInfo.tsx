@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function InvestmentInfo(props: { item: any }) {
     return (
-        <><div className={styles.seekInvestmentListItem}>
+        <div className={styles.seekInvestmentListItem}>
             <Link href={`/investment/${props.item.id}`}>
                 <Image className={styles.seekInvestmentListItemImage} width={65} height={65} src={props.item.image} alt={props.item.seeker}/>
             </Link>
@@ -31,5 +31,5 @@ export default function InvestmentInfo(props: { item: any }) {
                     <span className={styles.seekInvestmentListItemCategory}>{props.item.category}</span>
                 </div>
             </div>
-        </div></>)
+        </div>)
 };
