@@ -11,7 +11,6 @@ export enum LocationType {
 export class LocationEntity {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
-
   @Column({ type: 'text' })
   name: string;
   @Column({ type: 'text', nullable: true })

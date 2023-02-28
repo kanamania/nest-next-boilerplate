@@ -4,6 +4,7 @@ import { InvestmentEntity } from '../entity/investment.entity';
 import { InvestmentEntityRepository } from '../repository/investmentEntityRepository';
 import { FileService } from './file.service';
 import { UserEntity } from '../entity/user.entity';
+import { FileEntity } from '../entity/file.entity';
 @Injectable()
 export class InvestmentService {
   constructor(
@@ -16,7 +17,7 @@ export class InvestmentService {
     const obj: InvestmentEntity = await this.investmentRepository.save(
       this.investmentRepository.create(investment),
     );
-    await this.fileService.updateRecordInfo(obj);
+    await this.fileService.updateRecordInfo(obj, 'banner');
     return obj;
   }
   async findById(id: number): Promise<InvestmentEntity | null> {
@@ -26,6 +27,19 @@ export class InvestmentService {
         UserEntity,
         '_creator',
         '_creator.id=Investment.created_by',
+      )
+      .leftJoinAndSelect(FileEntity, '_banner', '_banner.id=Investment.banner')
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        'banner_url',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/thumbnail/', _banner.hash, '.webp')`,
+        'banner_thumbnail',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/medium/', _banner.hash, '.webp')`,
+        'banner_medium',
       )
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
@@ -42,6 +56,19 @@ export class InvestmentService {
         '_creator',
         '_creator.id=Investment.created_by',
       )
+      .leftJoinAndSelect(FileEntity, '_banner', '_banner.id=Investment.banner')
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        'banner_url',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/thumbnail/', _banner.hash, '.webp')`,
+        'banner_thumbnail',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/medium/', _banner.hash, '.webp')`,
+        'banner_medium',
+      )
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
         'creator',
@@ -49,12 +76,14 @@ export class InvestmentService {
       .getMany();
   }
   async update(id: string, data: any): Promise<any> {
-    return this.investmentRepository
+    const obj = await this.investmentRepository
       .createQueryBuilder()
       .update()
       .set(data)
       .where('id = :id', { id })
       .execute();
+    await this.fileService.updateRecordInfo(obj, 'banner');
+    return obj;
   }
   async delete(id: string): Promise<any> {
     return this.investmentRepository

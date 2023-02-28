@@ -4,8 +4,9 @@ import { LocationEntity } from '../entity/location.entity';
 import { LocationService } from '../service/location.service';
 import { LocationController } from '../controller/location.controller';
 import { LocationEntityRepository } from '../repository/locationEntityRepository';
+import { FileModule } from './file.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([LocationEntity])],
+  imports: [TypeOrmModule.forFeature([LocationEntity]), FileModule],
   controllers: [LocationController],
   providers: [LocationService, LocationEntityRepository],
   exports: [LocationService],

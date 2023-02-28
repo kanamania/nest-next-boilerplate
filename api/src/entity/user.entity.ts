@@ -32,6 +32,12 @@ export class UserEntity {
   @Column({ type: 'text', nullable: true })
   avatar: string;
   @VirtualColumn()
+  avatar_url: string;
+  @VirtualColumn()
+  avatar_thumbnail: string;
+  @VirtualColumn()
+  avatar_medium: string;
+  @VirtualColumn()
   creator: string;
   @Column('bigint', { unsigned: true })
   created_by: number;

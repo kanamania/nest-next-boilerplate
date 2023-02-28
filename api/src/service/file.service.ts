@@ -16,9 +16,10 @@ export class FileService {
     return this.fileRepository.save({
       name: file.originalname,
       mime: file.mimetype,
-      hash: file.filename,
+      hash: file.filename.split('.')[0],
       path: file.path,
       size: file.size,
+      ext: file.filename.split('.')[1],
       state: 'BAD',
       type: fileType(file.mime),
       created_by: user.id,
@@ -56,12 +57,16 @@ export class FileService {
       .where('id = :id', { id })
       .execute();
   }
-  async updateRecordInfo(obj: any): Promise<any> {
+  async updateRecordInfo(obj: any, field: string): Promise<any> {
     return this.fileRepository
       .createQueryBuilder()
       .update()
-      .set({ record_type: obj.constructor.name, record_id: obj.id })
-      .where('id = :id', { id: obj.banner })
+      .set({
+        record_type: obj.constructor.name,
+        record_id: obj.id,
+        state: 'good',
+      })
+      .where('id = :id', { id: obj[field] })
       .execute();
   }
   async update(id: number, file, user): Promise<any> {

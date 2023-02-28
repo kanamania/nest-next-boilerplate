@@ -6,22 +6,34 @@ import {
   Param,
   Post,
   Put,
-  Req,
+  Request,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { InvestmentService } from '../service/investment.service';
 import { InvestmentEntity } from '../entity/investment.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileUploadOptions } from '../utils/fileOptions';
+import { FileService } from '../service/file.service';
+import { FileEntity } from '../entity/file.entity';
+import * as fs from 'fs';
+import * as os from 'os';
 @Controller('investments')
 export class InvestmentController {
   private response: TResponse = new TResponse();
-  constructor(private investmentService: InvestmentService) {}
+  constructor(
+    private investmentService: InvestmentService,
+    private fileService: FileService,
+  ) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() investment: InvestmentEntity) {
-    return await this.investmentService.create(investment).then((response) => {
+  async create(@Request() req, @Body() investment: InvestmentEntity) {
+    investment.created_by = req.user.userId;
+    console.log({ investment });
+    return this.investmentService.create(investment).then((response) => {
       console.log(response);
       if (!response) {
         this.response.status = 'fail';
@@ -37,7 +49,7 @@ export class InvestmentController {
   }
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(@Req() request: Request) {
+  async findAll(@Request() request) {
     console.log(request.body);
     const investments: Array<InvestmentEntity> =
       await this.investmentService.findAll();

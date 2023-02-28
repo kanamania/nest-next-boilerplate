@@ -16,6 +16,12 @@ export class InvestmentEntity {
   name: string;
   @Column({ type: 'integer', nullable: true })
   banner: number;
+  @VirtualColumn()
+  banner_url: string;
+  @VirtualColumn()
+  banner_thumbnail: string;
+  @VirtualColumn()
+  banner_medium: string;
   @Column({ type: 'longtext', nullable: true })
   description: string;
   @Column({

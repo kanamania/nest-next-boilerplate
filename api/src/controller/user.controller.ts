@@ -21,7 +21,8 @@ export class UserController {
   constructor(private userService: UserService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() user: UserEntity) {
+  async create(@Req() req, @Body() user: UserEntity) {
+    user.created_by = req.user.userId;
     return await this.userService.create(user).then((response) => {
       console.log(response);
       if (!response) {
@@ -38,7 +39,7 @@ export class UserController {
   }
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(@Req() request: Request) {
+  async findAll() {
     const users: Array<UserEntity> = await this.userService.findAll();
     this.response.code = 200;
     this.response.status = 'success';

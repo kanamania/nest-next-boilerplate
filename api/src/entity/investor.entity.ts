@@ -1,5 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { VirtualColumn } from '../utils/virtualColumn';
+import { LocationType } from './location.entity';
+
+export enum INVESTMENTSTATUS {
+  PENDING = 'pending',
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected',
+  COMPLETED = 'completed',
+}
 
 @Entity('Investor')
 export class InvestorEntity {
@@ -13,6 +21,14 @@ export class InvestorEntity {
   amount: number;
   @Column({ type: 'text' })
   notes: string;
+  @Column({
+    type: 'enum',
+    enum: INVESTMENTSTATUS,
+    default: INVESTMENTSTATUS.PENDING,
+  })
+  status: string;
+  @VirtualColumn()
+  investment: string;
   @VirtualColumn()
   creator: string;
   @Column('bigint')

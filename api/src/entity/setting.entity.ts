@@ -2,10 +2,10 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { VirtualColumn } from '../utils/virtualColumn';
 
 export enum SettingType {
-  COUNTRY = 'country',
-  REGION = 'region',
-  DISTRICT = 'district',
-  WARD = 'ward',
+  TEXT = 'text',
+  EMAIL = 'email',
+  LONGTEXT = 'longtext',
+  NUMBER = 'number',
 }
 @Entity('Setting')
 export class SettingEntity {
@@ -24,6 +24,12 @@ export class SettingEntity {
   value_current: string;
   @Column({ type: 'text', nullable: true })
   value_default: string;
+  @VirtualColumn()
+  image_url: string;
+  @VirtualColumn()
+  image_thumbnail: string;
+  @VirtualColumn()
+  image_medium: string;
   @VirtualColumn()
   creator: string;
   @Column('bigint', { unsigned: true, nullable: true })

@@ -2,19 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LocationEntity } from '../entity/location.entity';
 import { LocationEntityRepository } from '../repository/locationEntityRepository';
-import { InvestmentEntity } from '../entity/investment.entity';
 import { UserEntity } from '../entity/user.entity';
+import { FileService } from './file.service';
+import { FileEntity } from '../entity/file.entity';
 @Injectable()
 export class LocationService {
   constructor(
     @InjectRepository(LocationEntity)
     private locationRepository: LocationEntityRepository,
+    private fileService: FileService,
   ) {}
 
   async create(location: LocationEntity): Promise<LocationEntity> {
-    return this.locationRepository.save(
+    const obj = await this.locationRepository.save(
       this.locationRepository.create(location),
     );
+    await this.fileService.updateRecordInfo(obj, 'banner');
+    return obj;
   }
   async findById(id: number): Promise<LocationEntity | null> {
     return this.locationRepository
@@ -23,6 +27,19 @@ export class LocationService {
         UserEntity,
         '_creator',
         '_creator.id=Location.created_by',
+      )
+      .leftJoinAndSelect(FileEntity, '_banner', '_banner.id=Location.banner')
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        'banner_url',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/thumbnail/', _banner.hash, '.webp')`,
+        'banner_thumbnail',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/medium/', _banner.hash, '.webp')`,
+        'banner_medium',
       )
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
@@ -39,6 +56,19 @@ export class LocationService {
         '_creator',
         '_creator.id=Location.created_by',
       )
+      .leftJoinAndSelect(FileEntity, '_banner', '_banner.id=Location.banner')
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        'banner_url',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/thumbnail/', _banner.hash, '.webp')`,
+        'banner_thumbnail',
+      )
+      .addSelect(
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/medium/', _banner.hash, '.webp')`,
+        'banner_medium',
+      )
       .addSelect(
         'CONCAT(_creator.first_name, " ", _creator.last_name)',
         'creator',
@@ -46,12 +76,14 @@ export class LocationService {
       .getMany();
   }
   async update(id: string, data: any): Promise<any> {
-    return this.locationRepository
+    const obj = await this.locationRepository
       .createQueryBuilder()
       .update()
       .set(data)
       .where('id = :id', { id })
       .execute();
+    await this.fileService.updateRecordInfo(obj, 'banner');
+    return obj;
   }
   async delete(id: string): Promise<any> {
     return this.locationRepository

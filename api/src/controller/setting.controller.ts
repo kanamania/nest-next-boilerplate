@@ -26,19 +26,7 @@ export class SettingController {
   constructor(private settingService: SettingService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  @UseInterceptors(FileInterceptor('banner'))
-  async create(
-    @Body() setting: SettingEntity,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
-  ) {
+  async create(@Body() setting: SettingEntity) {
     return await this.settingService.create(setting).then((response) => {
       if (!response) {
         this.response.status = 'fail';

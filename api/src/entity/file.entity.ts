@@ -23,6 +23,8 @@ export class FileEntity {
   @Column({ type: 'text' })
   mime: string;
   @Column({ type: 'text' })
+  ext: string;
+  @Column({ type: 'text' })
   path: string;
   @Column({ type: 'enum', enum: FileType })
   type: string;
