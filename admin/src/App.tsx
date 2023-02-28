@@ -25,15 +25,11 @@ import Crop54Icon from '@mui/icons-material/Crop54';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FolderIcon from '@mui/icons-material/Folder';
 import {FileEdit, FileShow, FileList} from './components/File';
-import Configs from '../configs';
 import {MainMenu} from './utils/Menu';
-import MyLayout from "./utils/Layout";
 import {SettingEdit, SettingList, SettingShow } from "./components/Settings";
-// @ts-ignore
-const dataProvider = apiServer(Configs.API_URL, httpClient);
-
+import fullDataProvider from './utils/fullDataProvider';
 const App = () => (
-    <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} menu={MainMenu}>
+    <Admin authProvider={authProvider} dataProvider={fullDataProvider} dashboard={Dashboard} menu={MainMenu}>
             <Title title="Alpha Project " />
             <Resource name="locations"
                   recordRepresentation={(record) => `${record.name}`}

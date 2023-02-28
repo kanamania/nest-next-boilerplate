@@ -11,9 +11,10 @@ import {
     TextInput,
     Show,
     SimpleShowLayout,
-    Create, SelectInput, required, ImageField, ImageInput, SelectField
+    Create, SelectInput, required, ImageField, ImageInput, SelectField, FunctionField
 } from 'react-admin';
 import ActionColumn from '../utils/ActionColumn';
+import * as dayjs from 'dayjs';
 
 export const LocationList = () => (
     <List>
@@ -21,17 +22,17 @@ export const LocationList = () => (
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="description" />
-            <ImageField source="banner" />
             <SelectField source="type" choices={[
                 {id: 'country', name: 'COUNTRY'},
                 {id: 'region', name: 'REGION'},
                 {id: 'district', name: 'DISTRICT'},
                 {id: 'ward', name: 'WARD'},
             ]} />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="name" />
-            </ReferenceField>
-            <DateField source="created_at" />
+            <TextField source="creator" />
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
             <ActionColumn source="action"/>
         </Datagrid>
     </List>
@@ -42,7 +43,9 @@ export const LocationCreate = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
             <SelectInput choices={[
                 {id: 'country', name: 'COUNTRY'},
                 {id: 'region', name: 'REGION'},
@@ -57,7 +60,9 @@ export const LocationEdit = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
             <SelectInput source="type" choices={[
                 {id: 'country', name: 'COUNTRY'},
                 {id: 'region', name: 'REGION'},
@@ -74,17 +79,18 @@ export const LocationShow = () => (
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="banner" />
+            <ImageField source="banner_thumbnail" />
             <SelectField source="type" choices={[
                 {id: 'country', name: 'COUNTRY'},
                 {id: 'region', name: 'REGION'},
                 {id: 'district', name: 'DISTRICT'},
                 {id: 'ward', name: 'WARD'},
             ]} />
-            <DateField source="created_at" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="name" />
-            </ReferenceField>
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
+            <TextField source="creator" />
         </SimpleShowLayout>
     </Show>
 );

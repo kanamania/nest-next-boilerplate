@@ -16,9 +16,9 @@ const ActionColumn = (props: any) => {
     const classes = useRowActionToolbarStyles();
     return (
         <div className={classes.toolbar}>
-            <ShowButton label="" basePath={props.basePath} record={props.record} className={classes.icon_action_button}/>
-            <EditButton label="" basePath={props.basePath} record={props.record} className={classes.icon_action_button}/>
-            <DeleteButton basePath={props.basePath} label="" record={props.record} className={classes.icon_action_button}/>
+            <ShowButton label="" record={props.record} className={classes.icon_action_button}/>
+            <EditButton label="" record={props.record} className={classes.icon_action_button}/>
+            <DeleteButton label="" record={props.record} className={classes.icon_action_button}/>
         </div>
     );
 };
