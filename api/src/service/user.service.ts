@@ -100,7 +100,7 @@ export class UserService {
         'creator',
       )
       .where('User.type NOT IN ("webmaster","admin")')
-      .getMany();-
+      .getMany();
   }
   async update(id: string, data: any): Promise<any> {
     if (data.password) {
