@@ -8,6 +8,9 @@ ARG USER
 ENV UID=${UID}
 ENV GID=${GID}
 ENV USER=${USER}
+ENV API_URL=${API_URL}
+ENV ADMIN_URL=${ADMIN_URL}
+ENV CLIENT_URL=${CLIENT_URL}
 
 # Dialout group in alpine linux conflicts with MacOS staff group's gid, whis is 20. So we remove it.
 RUN delgroup dialout
