@@ -40,10 +40,8 @@ export class AuthService {
     }
     const user: UserEntity = await this.usersService.findByEmail(email);
     if (user != null && ['admin', 'webmaster'].includes(user.type)) {
-      console.log({ user2: user });
       const check = await Encrypt.comparePassword(pass, user.password);
       if (check) {
-        console.log({ user3: user });
         const {
           password,
           created_at,
