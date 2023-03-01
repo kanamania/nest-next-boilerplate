@@ -38,6 +38,7 @@ export class AuthController {
     return this.authService
       .validateAdmin(req.email ?? req.username, req.password)
       .then((user: UserEntity) => {
+        console.log({ user });
         if (user != null) {
           return this.authService.login(user).then((token) => {
             this.response.code = 201;
