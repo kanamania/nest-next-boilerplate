@@ -41,6 +41,11 @@ export class InvestmentController {
     });
   }
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async find(@Param('id') id: string) {
+    return await this.investmentService.findById(parseInt(id));
+  }
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Request() request) {
     console.log(request.body);
