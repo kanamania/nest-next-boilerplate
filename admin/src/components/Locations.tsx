@@ -11,10 +11,11 @@ import {
     TextInput,
     Show,
     SimpleShowLayout,
-    Create, SelectInput, required, ImageField, ImageInput, SelectField, FunctionField
+    Create, SelectInput, required, ImageField, ImageInput, SelectField, FunctionField, useGetMany
 } from 'react-admin';
 import ActionColumn from '../utils/ActionColumn';
 import * as dayjs from 'dayjs';
+import { useWatch } from 'react-hook-form';
 
 export const LocationList = () => (
     <List>
@@ -38,12 +39,26 @@ export const LocationList = () => (
     </List>
 );
 
+const ParentInput = (props: any) => {
+    const type = useWatch({ name: 'type' });
+    const resource = type == 'ward' ? 'districts' : type == 'district' ? 'region' : 'country';
+    const {data, isLoading, error} = useGetMany(`locations/${resource}`);
+    const list = data ? data[type] : null;
+    return (
+        <SelectInput
+            choices={type ? toChoices(list): []}
+            {...props}
+        />
+    );
+};
+const toChoices = (items: any) => items.map((item: any) => ({ id: item, name: item }));
+
 export const LocationCreate = () => (
     <Create>
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
-            <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+            <TextInput source="description" />
+            <ImageInput source="banner" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
             <SelectInput choices={[
@@ -52,6 +67,7 @@ export const LocationCreate = () => (
                 {id: 'district', name: 'DISTRICT'},
                 {id: 'ward', name: 'WARD'},
             ]} source="type" validate={[required()]} />
+            <ParentInput source="parent" />
         </SimpleForm>
     </Create>
 );
@@ -59,8 +75,8 @@ export const LocationEdit = () => (
     <Edit>
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
-            <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+            <TextInput source="description" />
+            <ImageInput source="banner" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
             <SelectInput source="type" choices={[
@@ -69,6 +85,7 @@ export const LocationEdit = () => (
                 {id: 'district', name: 'DISTRICT'},
                 {id: 'ward', name: 'WARD'},
             ]} validate={[required()]} />
+            <ParentInput source="parent" />
         </SimpleForm>
     </Edit>
 );

@@ -36,13 +36,11 @@ export const InvestmentCategoryCreate = () => (
     <Create>
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
-            <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" accept="image/*" validate={[required()]}>
+            <TextInput source="description" />
+            <ImageInput source="banner" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <ImageInput source="banner" accept="image/*" validate={[required()]}>
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <ImageField source="banner_thumbnail" />
         </SimpleForm>
     </Create>
 );
@@ -50,13 +48,11 @@ export const InvestmentCategoryEdit = () => (
     <Edit>
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
-            <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" accept="image/*" validate={[required()]}>
+            <TextInput source="description" />
+            <ImageInput source="banner" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <ImageInput source="banner" accept="image/*" validate={[required()]}>
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <ImageField source="banner_thumbnail" />
         </SimpleForm>
     </Edit>
 );
@@ -67,7 +63,6 @@ export const InvestmentCategoryShow = () => (
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="icon_url" />
             <ImageField source="banner_thumbnail" />
             <FunctionField
                 label="Created"

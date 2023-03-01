@@ -20,6 +20,22 @@ const fullDataProvider = {
                 params.data.avatar = json.data.id;
             })
         }
+        if (resource == 'investment/areas') {
+            if(params.data.banner != undefined) {
+                // @ts-ignore
+                await uploadFile(params.data.banner.rawFile).then(({json}) => {
+                    params.data.banner = json.data.id;
+                });
+            }
+        }
+        if (resource == 'investment/categories') {
+            if(params.data.banner != undefined) {
+                // @ts-ignore
+                await uploadFile(params.data.banner.rawFile).then(({json}) => {
+                    params.data.banner = json.data.id;
+                });
+            }
+        }
         let headers = new Headers({"Accept": 'application/json'});
         headers.set('Content-Type', 'application/json');
         // @ts-ignore
@@ -33,7 +49,7 @@ const fullDataProvider = {
     },
     update: async (resource: any, params: any) => {
         if (resource == 'investments') {
-            if(params.data.banner) {
+            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
                 // @ts-ignore
                 await uploadFile(params.data.banner.rawFile).then(({json}) => {
                     params.data.banner = json.data.id;
@@ -41,16 +57,31 @@ const fullDataProvider = {
             }
         }
         if (resource == 'users') {
-            if(params.data.avatar) {
+            if(params.data.avatar != undefined && typeof params.data.avatar != 'string') {
                 // @ts-ignore
                 await uploadFile(params.data.avatar.rawFile).then(({json}) => {
                     params.data.avatar = json.data.id;
                 });
             }
         }
+        if (resource == 'investment/areas') {
+            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
+                // @ts-ignore
+                await uploadFile(params.data.banner.rawFile).then(({json}) => {
+                    params.data.banner = json.data.id;
+                });
+            }
+        }
+        if (resource == 'investment/categories') {
+            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
+                // @ts-ignore
+                await uploadFile(params.data.banner.rawFile).then(({json}) => {
+                    params.data.banner = json.data.id;
+                });
+            }
+        }
         if (resource == 'settings') {
-            console.log(params);
-            if(params.data.value_current && params.data.type == 'image') {
+            if((params.data.value_current != undefined && typeof params.data.banner != 'string') && params.data.type == 'image') {
                 // @ts-ignore
                 await uploadFile(params.data.value_current.rawFile).then(({json}) => {
                     console.log({newSettingImageId: json.data.id})

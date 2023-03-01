@@ -21,7 +21,7 @@ export const InvestmentAreaList = () => (
         <Datagrid rowClick="show">
             <TextField source="id" />
             <TextField source="name" />
-            <EmailField source="description" />
+            <TextField source="description" />
             <TextField source="creator" />
             <FunctionField
                 label="Created"
@@ -37,9 +37,6 @@ export const InvestmentAreaCreate = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" accept="image/*" validate={[required()]}>
-                <ImageField source="src" title="title" />
-            </ImageInput>
             <ImageInput source="banner" accept="image/*" validate={[required()]}>
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -51,12 +48,10 @@ export const InvestmentAreaEdit = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" accept="image/*" validate={[required()]}>
-                <ImageField source="src" title="title" />
-            </ImageInput>
             <ImageInput source="banner" accept="image/*" validate={[required()]}>
                 <ImageField source="src" title="title" />
             </ImageInput>
+            <ImageField source="banner_thumbnail" />
         </SimpleForm>
     </Edit>
 );
@@ -67,7 +62,6 @@ export const InvestmentAreaShow = () => (
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="icon_url" />
             <ImageField source="banner_thumbnail" />
             <FunctionField
                 label="Created"
