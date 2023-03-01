@@ -31,7 +31,7 @@ export class SettingService {
         '_image.id=Setting.value_current and Setting.type="image"',
       )
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _image.hash, '.', _image.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _image.hash, '.webp')`,
         'image_url',
       )
       .addSelect(
@@ -63,7 +63,7 @@ export class SettingService {
         '_image.id=Setting.value_current and Setting.type="image"',
       )
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _image.hash, '.', _image.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _image.hash, '.webp')`,
         'image_url',
       )
       .addSelect(

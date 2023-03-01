@@ -26,19 +26,7 @@ export class LocationController {
   constructor(private locationService: LocationService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  @UseInterceptors(FileInterceptor('banner'))
-  async create(
-    @Body() location: LocationEntity,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
-  ) {
+  async create(@Body() location: LocationEntity) {
     return await this.locationService.create(location).then((response) => {
       console.log(response);
       if (!response) {
@@ -52,6 +40,11 @@ export class LocationController {
       }
       return this.response;
     });
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async find(@Param('id') id: string) {
+    return await this.locationService.findById(parseInt(id));
   }
   @UseGuards(JwtAuthGuard)
   @Get()

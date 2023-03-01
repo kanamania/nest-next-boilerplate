@@ -55,7 +55,7 @@ export class UserService {
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
       .leftJoinAndSelect(FileEntity, '_avatar', '_avatar.id=User.avatar')
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _avatar.hash, '.', _avatar.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _avatar.hash, '.webp')`,
         'avatar_url',
       )
       .addSelect(
@@ -82,7 +82,7 @@ export class UserService {
       .leftJoinAndSelect(UserEntity, '_creator', '_creator.id=User.created_by')
       .leftJoinAndSelect(FileEntity, '_avatar', '_avatar.id=User.avatar')
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _avatar.hash, '.', _avatar.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _avatar.hash, '.webp')`,
         'avatar_url',
       )
       .addSelect(

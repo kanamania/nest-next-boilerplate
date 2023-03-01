@@ -12,6 +12,12 @@ export class InvestmentAreaEntity {
   @Column({ type: 'longtext', nullable: true })
   description: string;
   @VirtualColumn()
+  banner_url: string;
+  @VirtualColumn()
+  banner_thumbnail: string;
+  @VirtualColumn()
+  banner_medium: string;
+  @VirtualColumn()
   creator: string;
   @Column('bigint')
   created_by: number;

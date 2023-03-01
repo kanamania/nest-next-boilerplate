@@ -7,20 +7,13 @@ import {
   Post,
   Put,
   Request,
-  UploadedFile,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { InvestmentService } from '../service/investment.service';
 import { InvestmentEntity } from '../entity/investment.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { FileUploadOptions } from '../utils/fileOptions';
 import { FileService } from '../service/file.service';
-import { FileEntity } from '../entity/file.entity';
-import * as fs from 'fs';
-import * as os from 'os';
 @Controller('investments')
 export class InvestmentController {
   private response: TResponse = new TResponse();

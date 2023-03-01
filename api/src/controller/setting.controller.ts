@@ -43,13 +43,7 @@ export class SettingController {
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async find(@Param('id') id: string) {
-    const setting: SettingEntity = await this.settingService.findById(
-      parseInt(id),
-    );
-    this.response.code = 200;
-    this.response.status = 'success';
-    this.response.data = setting;
-    return setting;
+    return await this.settingService.findById(parseInt(id));
   }
   @UseGuards(JwtAuthGuard)
   @Get()

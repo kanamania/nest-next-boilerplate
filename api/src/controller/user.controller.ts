@@ -49,11 +49,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async get(@Param('id') id: number) {
-    const user: UserEntity = await this.userService.findById(id);
-    this.response.code = 200;
-    this.response.status = 'success';
-    this.response.data = user;
-    return user;
+    return await this.userService.findById(id);
   }
   @UseGuards(JwtAuthGuard)
   @Patch(':id')

@@ -37,7 +37,7 @@ export class InvestmentCategoryService {
         '_banner.id=InvestmentCategory.banner',
       )
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.webp')`,
         'banner_url',
       )
       .addSelect(
@@ -69,7 +69,7 @@ export class InvestmentCategoryService {
         '_banner.id=InvestmentCategory.banner',
       )
       .addSelect(
-        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.', _banner.ext)`,
+        `CONCAT('${process.env.REACT_APP_API_URL}', '/files/', _banner.hash, '.webp')`,
         'banner_url',
       )
       .addSelect(
