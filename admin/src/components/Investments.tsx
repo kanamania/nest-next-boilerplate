@@ -65,6 +65,7 @@ export const InvestmentEdit = () => (
             <ImageInput source="banner" accept="image/*" validate={[required()]}>
                 <ImageField source="src" title="title" />
             </ImageInput>
+            <ImageField source="banner_thumbnail" />
             <SelectInput source="status" choices={[
                 {id: 'pending', name:'PENDING'},
                 {id: 'seeking', name:'SEEKING'},

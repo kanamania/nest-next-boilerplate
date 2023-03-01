@@ -49,7 +49,8 @@ const fullDataProvider = {
     },
     update: async (resource: any, params: any) => {
         if (resource == 'investments') {
-            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
+            if(params.data.banner != undefined && typeof params.data.banner === 'object') {
+                console.log(params.data);
                 // @ts-ignore
                 await uploadFile(params.data.banner.rawFile).then(({json}) => {
                     params.data.banner = json.data.id;
@@ -57,7 +58,8 @@ const fullDataProvider = {
             }
         }
         if (resource == 'users') {
-            if(params.data.avatar != undefined && typeof params.data.avatar != 'string') {
+            console.log(typeof params.data.avatar);
+            if(params.data.avatar != undefined && typeof params.data.avatar === 'object') {
                 // @ts-ignore
                 await uploadFile(params.data.avatar.rawFile).then(({json}) => {
                     params.data.avatar = json.data.id;
@@ -65,7 +67,7 @@ const fullDataProvider = {
             }
         }
         if (resource == 'investment/areas') {
-            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
+            if(params.data.banner != undefined && typeof params.data.banner === 'object') {
                 // @ts-ignore
                 await uploadFile(params.data.banner.rawFile).then(({json}) => {
                     params.data.banner = json.data.id;
@@ -73,7 +75,7 @@ const fullDataProvider = {
             }
         }
         if (resource == 'investment/categories') {
-            if(params.data.banner != undefined && typeof params.data.banner != 'string') {
+            if(params.data.banner != undefined && typeof params.data.banner === 'object') {
                 // @ts-ignore
                 await uploadFile(params.data.banner.rawFile).then(({json}) => {
                     params.data.banner = json.data.id;
@@ -81,7 +83,7 @@ const fullDataProvider = {
             }
         }
         if (resource == 'settings') {
-            if((params.data.value_current != undefined && typeof params.data.banner != 'string') && params.data.type == 'image') {
+            if(params.data.value_current != undefined && typeof params.data.banner === 'object') {
                 // @ts-ignore
                 await uploadFile(params.data.value_current.rawFile).then(({json}) => {
                     console.log({newSettingImageId: json.data.id})
