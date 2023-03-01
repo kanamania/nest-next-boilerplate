@@ -39,6 +39,7 @@ export class AuthService {
       return null;
     }
     const user: UserEntity = await this.usersService.findByEmail(email);
+    console.log({ user2: user });
     if (user != null && ['admin', 'webmaster'].includes(user.type)) {
       const check = await Encrypt.comparePassword(pass, user.password);
       if (check) {
