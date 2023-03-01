@@ -43,6 +43,7 @@ export class InvestmentController {
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async find(@Param('id') id: string) {
+    console.log({ env: process.env });
     return await this.investmentService.findById(parseInt(id));
   }
   @UseGuards(JwtAuthGuard)
