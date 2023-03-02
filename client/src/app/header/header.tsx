@@ -12,7 +12,7 @@ export default function Header(props: {current: string, headerInfo: {heading: an
     if (!initialRenderComplete) return null;
     else
         return (
-        <header className={styles.headerContainer}>
+        <header className={!['login', 'register', 'forgot'].includes(props.current) ? styles.headerContainer : styles.headerContainerEmpty}>
             <div className={styles.menuBar}>
                 <div className={styles.brand}>
                     <Link href="/">Alpha<b>Project</b></Link>
@@ -39,9 +39,14 @@ export default function Header(props: {current: string, headerInfo: {heading: an
                     <li>
                         <Link className={`${props.current=='mediacenter' ? styles.menuSelected : null}`.trim()} href="/mediacenter">Media<br/>Center</Link>
                     </li>
+                    <li>
+                        <Link className={`${props.current=='mediacenter' ? styles.menuSelected : null}`.trim()} href="/login">
+                            <Image src="/user.svg" alt='' width={32} height={32} />
+                        </Link>
+                    </li>
                 </ul>
             </div>
-            <div className={styles.headerDescription}>
+            <div className={!['login', 'register', 'forgot'].includes(props.current) ? styles.headerDescription : styles.headerDescriptionEmpty}>
                 <Image alt="..." className={styles.headerDescriptionAngle} src="/angle.svg" width={82} height={113} />
                 <h1 className={styles.headerDescriptionTitle}>{props.headerInfo ? props.headerInfo.heading: null}</h1>
                 <p className={styles.headerDescriptionText}>{props.headerInfo ? props.headerInfo.text : null}</p>

@@ -5,8 +5,6 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 
 function MyApp({Component, pageProps}) {
-    console.log(Component.meta)
-    console.log(pageProps)
     return (
         <>
             <Head>
