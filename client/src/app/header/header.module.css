@@ -3,6 +3,9 @@
     background-position: center;
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%), url("/Header.png");
 }
+.headerContainerEmpty {
+    height: 158px;
+}
 .menuBar {
     height: 57px;
     background: #007FFF;
@@ -40,6 +43,9 @@
     top: 35%;
     position: relative;
 }
+.headerDescriptionEmpty {
+    display: none;
+}
 .headerDescriptionAngle  {
     position: absolute;
 }
@@ -58,6 +64,7 @@
     width: 337px;
     color: #FFFFFF;
     margin-left: 36px;
+    min-height: 56px;
 }
 .headerDescriptionButton {
     width: 186px;

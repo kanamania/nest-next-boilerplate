@@ -7,7 +7,7 @@ export default (url: string, options = {}) => {
         // @ts-ignore
         if (!options.headers) {
             // @ts-ignore
-            options.headers = new Headers({Accept: 'application/json'});
+            options.headers = new Headers({"Accept": 'json'});
         }
         // @ts-ignore
         options.headers.set("Authorization", `Bearer ${token}`);

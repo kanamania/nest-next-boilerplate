@@ -19,8 +19,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import './polyfill';
 import { configuration } from './config/configuration';
+import { SettingModule } from './module/setting.module';
 
 const IMPORTED_MODULES = [
+  SettingModule,
   AuthModule,
   FileModule,
   UserModule,

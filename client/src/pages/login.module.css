@@ -1,0 +1,97 @@
+
+.inputContainer input[type="email"],
+.inputContainer input[type="password"] {
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    line-height: 20px;
+    height: 38px;
+    font-size: 16px;
+}
+
+.buttonContainer button {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #007FFF;
+    width: 130px;
+    height: 45px;
+    border-radius: 100px;
+    margin-right: 9px;
+    border: none;
+    padding: 8px;
+    gap: 10px;
+    color: #fff;
+}
+
+.buttonContainer button:hover {
+    background: rgba(0, 127, 255, 0.76);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.loginForm {
+    width: 400px;
+    min-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    height: 50vh;
+}
+.loginForm form h3 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+.loginForm form {
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
+    border-radius: 20px;
+    height: 100vh;
+}
+.listContainer {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.title {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+    text-transform: uppercase;
+}
+.isInvalid {
+    border-color: #dc3545;
+}
+.invalidFeedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

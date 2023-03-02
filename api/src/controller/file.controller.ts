@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Req,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -16,8 +17,10 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from '../service/file.service';
-import { FileUploadOptions } from '../utils/fileOptions';
+import { FileUploadOptions, multerConfig } from '../utils/fileOptions';
 import { FileEntity } from '../entity/file.entity';
+import { Public } from '../utils/ispublic';
+import { SharpPipe } from '../utils/sharp.pipe';
 @Controller('files')
 export class FileController {
   private response: TResponse = new TResponse();
@@ -26,10 +29,8 @@ export class FileController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('file', FileUploadOptions))
-  async upload(@UploadedFile() file, @Req() req: Request) {
-    console.log(file);
+  async upload(@UploadedFile(SharpPipe) file, @Req() req: Request) {
     return await this.fileService.save(file, req.user).then((response) => {
-      console.log(response);
       if (!response) {
         this.response.status = 'fail';
         this.response.message = 'File upload fail.';
@@ -51,7 +52,6 @@ export class FileController {
     @Param('id') id: number,
     @Req() req: Request,
   ) {
-    console.log(file);
     return await this.fileService
       .update(id, file, req.user)
       .then((response) => {
@@ -77,20 +77,24 @@ export class FileController {
         this.response.message = null;
         this.response.code = 200;
         this.response.status = 'success';
-        this.response.data = response;
+        this.response.data = response ?? [];
         return this.response;
       });
   }
-  @UseGuards(JwtAuthGuard)
-  @Get(':id')
-  async find(@Param('id') id: number) {
-    return await this.fileService.findById(id).then((response) => {
-      this.response.message = null;
-      this.response.code = 200;
-      this.response.status = 'success';
-      this.response.data = response;
-      return response;
-    });
+  @Get(':path')
+  @Public()
+  async find(@Param('path') file, @Res() res) {
+    return res.sendFile(file, { root: multerConfig.dest });
+  }
+  @Get('medium/:path')
+  @Public()
+  async medium(@Param('path') file, @Res() res) {
+    return res.sendFile(file, { root: `${multerConfig.dest}/mediums` });
+  }
+  @Get('thumbnail/:path')
+  @Public()
+  async thumbnail(@Param('path') file, @Res() res) {
+    return res.sendFile(file, { root: `${multerConfig.dest}/thumbnails` });
   }
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

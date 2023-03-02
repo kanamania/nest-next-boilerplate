@@ -50,7 +50,7 @@ export class AuthController {
         }
         this.response.code = 401;
         this.response.status = 'failed';
-        this.response.message = "Login failed. Email and password don't match";
+        this.response.message = "Login failed. Email and password don't match.";
         return this.response;
       });
   }

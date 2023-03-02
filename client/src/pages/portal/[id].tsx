@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import styles from './[id].module.css';
 import useSet from '@restart/hooks/useSet';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {countries} from '@/pages/portal';
@@ -68,8 +68,14 @@ const PortalCountryPage = () => {
                 "Tortor ut placerat commodo mauris. Auctor urna turpis congue dolor faucibus quis rhoncus. Tempus vitae massa faucibus sed habitasse nisi. Tincidunt interdum habitant aliquam ullamcorper ac est morbi aliquet proin. Blandit convallis tristique neque ullamcorper venenatis ac vestibulum ornare. Habitant augue commodo sit dui in id. Sed sagittis molestie amet ullamcorper ut velit in mattis tincidunt.",
         },
     ]);
-    return (
-        <>
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+        return (
             <main className={styles.portalMain}>
                 <div className={styles.portalContainer}>
                     <div className={styles.breadcrumbs}>
@@ -85,11 +91,9 @@ const PortalCountryPage = () => {
                         <div className={styles.portalSidebar}>
                             <ul>
                                 {sidebarMenu.map((item: any, index: number) => (
-                                    <>
                                         <li key={index}>
                                             <Link href="#">{item.title}</Link>
                                         </li>
-                                    </>
                                     ))}
                             </ul>
                         </div>
@@ -152,7 +156,6 @@ const PortalCountryPage = () => {
                                 <p className={styles.portalSubSectionBody}>
                                     <ul className={styles.fancyList}>
                                         {nicheList.map((item: any, index: number) => (
-                                            <>
                                             <li key={index}>
                                                 <div>
                                                     <span className={styles.outerBorder}>
@@ -164,7 +167,6 @@ const PortalCountryPage = () => {
                                                     <p dangerouslySetInnerHTML={{ __html: item.body }}></p>
                                                 </div>
                                             </li>
-                                            </>
                                         ))}
                                     </ul>
                                 </p>
@@ -173,7 +175,6 @@ const PortalCountryPage = () => {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 

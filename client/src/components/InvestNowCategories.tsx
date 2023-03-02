@@ -9,10 +9,10 @@ export default function InvestNowCategories(props: { list: any[]; }) {
         <>
             <div className={styles.investNowSidebar}>
                 <ul>
-                    {props.list.map((item, index) => (
+                    {props.list.map((item: any, index: number) => (
                         // @ts-ignore
                         // eslint-disable-next-line react/jsx-key
-                        <li className={`${index==0 ? styles.investNowSidebarSelected : null}`.trim()}>
+                        <li key={index} className={`${index==0 ? styles.investNowSidebarSelected : null}`.trim()}>
                             <a onClick={() => setContent(props.list[index])}>
                                 <Image className={styles.investNowSidebarIcon} alt={item.title} width={30} height={30} src={"/" + item.icon}/>
                                 <span>{item.title}</span>

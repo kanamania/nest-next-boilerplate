@@ -1,7 +1,8 @@
 import styles from '@/pages/portal.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import Mediacenter from '@/pages/mediacenter';
 export const countries = [
     {
         id: "tanzania",
@@ -46,16 +47,21 @@ export const countries = [
         description: "Tempus aliquam iaculis suscipit neque id adipiscing laoreet porta. Augue pharetra mattis metus at. Viverra bibendum dolor venenatis adipiscing elit quis lectus viverra odio. A ipsum risus at cursus pulvinar.",
     },
 ];
-export default function Portal() {
+function Portal() {
     const [countriesList, setCountriesList] = useState(countries);
-    return (
-        <>
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+
+    useEffect(() => {
+        setInitialRenderComplete(true);
+    }, []);
+    if (!initialRenderComplete) return null;
+    else
+        return (
             <main className={styles.portalMain}>
                 <div className={styles.portalContainer}>
                     <h1>Information Portal</h1>
                     <ul className={styles.portalCountriesList}>
                         {countriesList.map((item: any, index: number) => (
-                        <>
                         <li key={index}>
                             <Link href={item.url}>
                                 <Image src={item.flag} alt='.' width={80} height={58} />
@@ -66,7 +72,6 @@ export default function Portal() {
                                 <Image src="/caret-right.svg" alt="." width={20} height={30} />
                             </Link>
                         </li>
-                        </>
                         ))}
                     </ul>
                     <div className={styles.portalAd}>
@@ -76,6 +81,24 @@ export default function Portal() {
                     <div className={styles.marginBottom}></div>
                 </div>
             </main>
-        </>
     )
 }
+export async function getStaticProps() {
+    return {
+        props: {
+            headerInfo: {
+                heading: 'Information Portal',
+                text: "Heading description",
+                buttonText: "Click here",
+                buttonLink: "#"
+            },
+            meta: {
+                title: "Information Portal",
+                description: "Information Portal"
+            },
+            current: 'portal'
+        }
+    }
+}
+
+export default Portal;

@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VirtualColumn } from '../utils/virtualColumn';
 
 @Entity('InvestmentCategory')
 export class InvestmentCategoryEntity {
@@ -10,6 +11,14 @@ export class InvestmentCategoryEntity {
   banner: string;
   @Column({ type: 'longtext', nullable: true })
   description: string;
+  @VirtualColumn()
+  banner_url: string;
+  @VirtualColumn()
+  banner_thumbnail: string;
+  @VirtualColumn()
+  banner_medium: string;
+  @VirtualColumn()
+  creator: string;
   @Column('bigint')
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })

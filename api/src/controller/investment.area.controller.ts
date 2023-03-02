@@ -14,13 +14,15 @@ import { InvestmentAreaService } from '../service/investment.area.service';
 import { InvestmentAreaEntity } from '../entity/investment.area.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
+import { UserEntity } from '../entity/user.entity';
 @Controller('investment/areas')
 export class InvestmentAreaController {
   private response: TResponse = new TResponse();
   constructor(private investmentAreaService: InvestmentAreaService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() investmentArea: InvestmentAreaEntity) {
+  async create(@Req() req, @Body() investmentArea: InvestmentAreaEntity) {
+    investmentArea.created_by = req.user.userId;
     return await this.investmentAreaService
       .create(investmentArea)
       .then((response) => {
@@ -38,6 +40,11 @@ export class InvestmentAreaController {
       });
   }
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async get(@Param('id') id: number) {
+    return await this.investmentAreaService.findById(id);
+  }
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Req() request: Request) {
     console.log(request.body);
@@ -45,12 +52,13 @@ export class InvestmentAreaController {
       await this.investmentAreaService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
-    this.response.data = investmentAreas;
+    this.response.data = investmentAreas ?? [];
     return this.response;
   }
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async update(@Param('id') id: string, @Body() body: any) {
+  async update(@Req() req, @Param('id') id: string, @Body() body: any) {
+    body.modified_by = req.user.userId;
     return await this.investmentAreaService
       .update(id, body)
       .then((response) => {

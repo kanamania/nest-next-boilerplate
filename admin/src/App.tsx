@@ -1,4 +1,4 @@
-import {Admin, Resource, ListGuesser, ShowGuesser, EditGuesser} from "react-admin";
+import {Admin, Resource, ListGuesser, ShowGuesser, EditGuesser, Title} from "react-admin";
 import apiServer from 'ra-data-nestjsx-crud';
 import { authProvider } from "./authProvider";
 import { Dashboard } from "./Dashboard";
@@ -25,14 +25,13 @@ import Crop54Icon from '@mui/icons-material/Crop54';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FolderIcon from '@mui/icons-material/Folder';
 import {FileEdit, FileShow, FileList} from './components/File';
-import Configs from '../configs';
 import {MainMenu} from './utils/Menu';
-// @ts-ignore
-const dataProvider = apiServer(Configs.API_URL, httpClient);
-
+import {SettingEdit, SettingList, SettingShow } from "./components/Settings";
+import fullDataProvider from './utils/fullDataProvider';
 const App = () => (
-    <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} menu={MainMenu}>
-        <Resource name="locations"
+    <Admin authProvider={authProvider} dataProvider={fullDataProvider} dashboard={Dashboard} menu={MainMenu}>
+            <Title title="Alpha Project " />
+            <Resource name="locations"
                   recordRepresentation={(record) => `${record.name}`}
                   list={LocationList}
                   edit={LocationEdit}
@@ -86,6 +85,15 @@ const App = () => (
                   hasCreate={true}
                   hasShow={true}
                   icon={UserIcon} />
+        <Resource name="settings"
+                  recordRepresentation={(record) => `${record.name}`}
+                  list={SettingList}
+                  edit={SettingEdit}
+                  show={SettingShow}
+                  hasEdit={true}
+                  hasShow={true}
+                  options={{label:"Configurations"}}
+                  />
     </Admin>
 );
 

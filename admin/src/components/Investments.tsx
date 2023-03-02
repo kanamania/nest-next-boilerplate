@@ -11,16 +11,17 @@ import {
     TextInput,
     Show,
     SimpleShowLayout,
-    Create, SelectInput, required, ImageField, ImageInput, SelectField
+    Create, SelectInput, required, ImageField, ImageInput, SelectField, FunctionField
 } from 'react-admin';
+import ActionColumn from '../utils/ActionColumn';
+import * as dayjs from 'dayjs';
 
 export const InvestmentList = () => (
     <List>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="banner" />
             <SelectField source="status" choices={[
                 {id: 'pending', name:'PENDING'},
                 {id: 'seeking', name:'SEEKING'},
@@ -28,10 +29,12 @@ export const InvestmentList = () => (
                 {id: 'failed', name:'FAILED'},
                 {id: 'cancelled', name:'CANCELLED'},
             ]}/>
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="first_name" />
-            </ReferenceField>
-            <DateField source="created_at" />
+            <TextField source="creator" />
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
+            <ActionColumn source="action"/>
         </Datagrid>
     </List>
 );
@@ -41,14 +44,16 @@ export const InvestmentCreate = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
             <SelectInput source="status" choices={[
                 {id: 'pending', name:'PENDING'},
                 {id: 'seeking', name:'SEEKING'},
                 {id: 'invested', name:'INVESTED'},
                 {id: 'failed', name:'FAILED'},
                 {id: 'cancelled', name:'CANCELLED'},
-            ]} validate={[required()]} />
+            ]} validate={[required()]} defaultValue='pending'/>
         </SimpleForm>
     </Create>
 );
@@ -57,7 +62,10 @@ export const InvestmentEdit = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
+            <ImageField source="banner_thumbnail" />
             <SelectInput source="status" choices={[
                 {id: 'pending', name:'PENDING'},
                 {id: 'seeking', name:'SEEKING'},
@@ -75,7 +83,7 @@ export const InvestmentShow = () => (
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="banner" />
+            <ImageField source="banner_thumbnail" />
             <TextField source="type" />
             <SelectField source="status" choices={[
                 {id: 'pending', name:'PENDING'},
@@ -84,10 +92,11 @@ export const InvestmentShow = () => (
                 {id: 'failed', name:'FAILED'},
                 {id: 'cancelled', name:'CANCELLED'},
             ]}/>
-            <DateField source="created_at" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="first_name" />
-            </ReferenceField>
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
+            <TextField source="creator" />
         </SimpleShowLayout>
     </Show>
 );

@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { VirtualColumn } from '../utils/virtualColumn';
 
 export enum LocationType {
   COUNTRY = 'country',
@@ -10,7 +11,6 @@ export enum LocationType {
 export class LocationEntity {
   @PrimaryGeneratedColumn({ unsigned: true })
   id: number;
-
   @Column({ type: 'text' })
   name: string;
   @Column({ type: 'text', nullable: true })
@@ -19,6 +19,8 @@ export class LocationEntity {
   description: string;
   @Column({ type: 'enum', enum: LocationType })
   type: string;
+  @VirtualColumn()
+  creator: string;
   @Column('bigint', { unsigned: true, nullable: true })
   created_by: number;
   @Column('bigint', { unsigned: true, nullable: true })

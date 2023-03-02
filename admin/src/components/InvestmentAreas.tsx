@@ -11,20 +11,23 @@ import {
     TextInput,
     Show,
     SimpleShowLayout,
-    Create, SelectInput, required, ImageField, ImageInput
+    Create, SelectInput, required, ImageField, ImageInput, FunctionField
 } from 'react-admin';
+import ActionColumn from '../utils/ActionColumn';
+import * as dayjs from 'dayjs';
 
 export const InvestmentAreaList = () => (
     <List>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
-            <ImageField source="banner" />
             <TextField source="name" />
-            <EmailField source="description" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="name" />
-            </ReferenceField>
-            <DateField source="created_at" />
+            <TextField source="description" />
+            <TextField source="creator" />
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
+            <ActionColumn source="action"/>
         </Datagrid>
     </List>
 );
@@ -34,8 +37,9 @@ export const InvestmentAreaCreate = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
         </SimpleForm>
     </Create>
 );
@@ -44,8 +48,10 @@ export const InvestmentAreaEdit = () => (
         <SimpleForm>
             <TextInput source="name" validate={[required()]} />
             <TextInput source="description" validate={[required()]} />
-            <ImageInput source="icon" validate={[required()]} />
-            <ImageInput source="banner" validate={[required()]} />
+            <ImageInput source="banner" accept="image/*" validate={[required()]}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
+            <ImageField source="banner_thumbnail" />
         </SimpleForm>
     </Edit>
 );
@@ -56,12 +62,12 @@ export const InvestmentAreaShow = () => (
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="description" />
-            <ImageField source="icon" />
-            <ImageField source="banner" />
-            <DateField source="created_at" />
-            <ReferenceField source="created_by" reference="users" label="Creator">
-                <TextField source="name" />
-            </ReferenceField>
+            <ImageField source="banner_thumbnail" />
+            <FunctionField
+                label="Created"
+                render={(record: any) => `${dayjs(record.created_at).format('DD/MM/YYYY')}`}
+            />
+            <TextField source="creator" />
         </SimpleShowLayout>
     </Show>
 );

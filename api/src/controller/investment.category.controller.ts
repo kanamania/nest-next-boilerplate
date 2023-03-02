@@ -20,7 +20,11 @@ export class InvestmentCategoryController {
   constructor(private investmentCategoryService: InvestmentCategoryService) {}
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() investmentCategory: InvestmentCategoryEntity) {
+  async create(
+    @Req() req,
+    @Body() investmentCategory: InvestmentCategoryEntity,
+  ) {
+    investmentCategory.created_by = req.user.userId;
     return await this.investmentCategoryService
       .create(investmentCategory)
       .then((response) => {
@@ -38,6 +42,11 @@ export class InvestmentCategoryController {
       });
   }
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async find(@Param('id') id: string) {
+    return await this.investmentCategoryService.findById(parseInt(id));
+  }
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Req() request: Request) {
     console.log(request.body);
@@ -45,12 +54,13 @@ export class InvestmentCategoryController {
       await this.investmentCategoryService.findAll();
     this.response.code = 200;
     this.response.status = 'success';
-    this.response.data = investmentCategories;
+    this.response.data = investmentCategories ?? [];
     return this.response;
   }
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async update(@Param('id') id: string, @Body() body: any) {
+  async update(@Req() req, @Param('id') id: string, @Body() body: any) {
+    body.modified_by = req.user.userId;
     return await this.investmentCategoryService
       .update(id, body)
       .then((response) => {
