@@ -1,11 +1,11 @@
-import {apiHandler} from '@/helpers/api-handler';
+import { apiHandler } from '@/helpers/api-handler';
 
 export default apiHandler({
-    post: login
+  post: login,
 });
 
 function login(req: any, res: any) {
-    console.log(req)
-    const data = req.body;
-    ///TODO fetch post /auth/login
+  console.log(req);
+  const data = req.body;
+  ///TODO fetch post /auth/login
 }

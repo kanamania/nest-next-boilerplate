@@ -1,10 +1,10 @@
-import {apiHandler} from '@/helpers/api-handler';
+import { apiHandler } from '@/helpers/api-handler';
 
 export default apiHandler({
-    delete: remove,
+  delete: remove,
 });
 
 function remove(req: any, res: any) {
-    const data = req.body;
-    ///TODO fetch delete /investments
+  const data = req.body;
+  ///TODO fetch delete /investments
 }

@@ -1,6 +1,6 @@
 {
-  "name": "client",
-  "version": "0.0.1",
+  "name": "client2",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "PORT=666 next dev",
@@ -10,23 +10,28 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
-    "@next/font": "13.1.6",
-    "@types/node": "18.11.18",
-    "@types/react": "18.0.27",
-    "@types/react-dom": "18.0.10",
-    "bootstrap": "^5.2.3",
-    "eslint": "8.33.0",
-    "eslint-config-next": "13.1.6",
+    "@next/font": "^13.2.3",
     "express-jwt": "^8.4.1",
-    "next": "13.1.6",
+    "next": "13.2.3",
     "react": "18.2.0",
-    "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.3",
+    "react-loader-spinner": "^5.3.4",
     "react-toastify": "^9.1.1",
     "rxjs": "^7.8.0",
     "swr": "^2.0.4",
-    "typescript": "4.9.5",
     "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.14.5",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "8.35.0",
+    "eslint-config-next": "13.2.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "4.9.5"
   }
 }

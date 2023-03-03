@@ -107,3 +107,8 @@ a {
 * {
   font-family: 'Inter', sans-serif;
 }
+
+button:hover, a:hover {
+  opacity: .5;
+  cursor: pointer;
+}
