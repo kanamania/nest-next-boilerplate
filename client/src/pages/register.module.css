@@ -1,6 +1,5 @@
 
-.inputContainer input[type="email"],
-.inputContainer input[type="password"] {
+.inputContainer input {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 5px;
@@ -33,35 +32,33 @@
     justify-content: center;
 }
 
-.loginForm {
+.registerForm {
     width: 400px;
     min-width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
     line-height: 18px;
-    height: 50vh;
 }
-.loginForm form h3 {
+.registerForm form h3 {
     text-align: center;
     font-weight: 300;
     font-size: 18px;
     line-height: 24px;
     text-transform: uppercase;
 }
-.loginForm form {
+.registerForm form {
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 100%;
     border-radius: 20px;
-    height: 100vh;
 }
 .listContainer {
     display: flex;
@@ -94,6 +91,7 @@
     font-size: 80%;
     color: #dc3545;
 }
+
 .bottomLinks {
     display: flex;
     justify-content: space-between;

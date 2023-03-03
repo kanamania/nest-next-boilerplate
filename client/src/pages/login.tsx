@@ -4,6 +4,7 @@ import styles from './login.module.css'
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import Link from 'next/link';
 
 const preventDefault = (f: any) => (e: any) => {
     e.preventDefault()
@@ -56,6 +57,10 @@ function Login() {
                     </div>
                     <div className={styles.buttonContainer}>
                         <button type="submit">Sign in</button>
+                    </div>
+                    <div className={styles.bottomLinks}>
+                        <Link href="/register">Create account now</Link>
+                        <Link href="/forgot">Forgot Password?</Link>
                     </div>
                 </form>
             </main>
