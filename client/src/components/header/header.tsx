@@ -17,7 +17,7 @@ export default function Header(props: {
     return (
       <header
         className={
-          !['login', 'register', 'forgot'].includes(props.current)
+          !['login', 'register', 'forgot', 'reset'].includes(props.current)
             ? styles.headerContainer
             : styles.headerContainerEmpty
         }
@@ -114,7 +114,7 @@ export default function Header(props: {
             <li>
               <Link
                 className={`${
-                  props.current == 'mediacenter' ? styles.menuSelected : null
+                  props.current == 'login' ? styles.menuSelected : null
                 }`.trim()}
                 href="/login"
               >
@@ -125,7 +125,7 @@ export default function Header(props: {
         </div>
         <div
           className={
-            !['login', 'register', 'forgot'].includes(props.current)
+            !['login', 'register', 'forgot', 'reset'].includes(props.current)
               ? styles.headerDescription
               : styles.headerDescriptionEmpty
           }

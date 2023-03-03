@@ -28,10 +28,10 @@ const Register: NextPage = () => {
   const renderForm = ({ register, errors, isSubmitting }: FormProps) => {
     return (
       <>
-        {fields.map((field) => {
+        {fields.map((field, index) => {
           return (
             <>
-              <div className={styles.inputContainer}>
+              <div key={index} className={styles.inputContainer}>
                 <label htmlFor={field.name}>{field.label}</label>
                 <input
                   type={field.type}
@@ -51,7 +51,7 @@ const Register: NextPage = () => {
       </>
     );
   };
-  return <GenericForm url="/api/auth/register" renderForm={renderForm} />;
+  return <GenericForm url="/auth/register" renderForm={renderForm} />;
 };
 
 export const getStaticProps = () => {

@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { AuthService } from '@/services/auth.service';
+import { redirect } from 'next/navigation';
 
 function Login() {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
@@ -20,9 +22,13 @@ function Login() {
   const { errors } = formState;
   const formData = watch();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(formData);
     console.log('submitted');
+    const auth = await AuthService.login(formData.email, formData.password);
+    if (auth) {
+      return redirect('/dashboard');
+    }
     return false;
   };
 
@@ -36,7 +42,7 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Sign in</h3>
           <div className={styles.inputContainer}>
-            <label>Username </label>
+            <label>Email </label>
             <input
               type="email"
               {...register('email')}

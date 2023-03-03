@@ -11,6 +11,7 @@ export class AuthController {
   @Public()
   @Post('auth/login')
   async login(@Body() req: { username?: any; email?: any; password: any }) {
+    console.log({ req });
     return this.authService
       .validateUser(req.email ?? req.username, req.password)
       .then((user) => {
