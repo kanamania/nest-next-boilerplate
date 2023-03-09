@@ -1,8 +1,7 @@
 import { Props } from '@/helpers/types';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useConfirmRedirectIfDirty } from '@/helpers/useConfirmRedirectIfDirty';
-import { fetcher, saveFormData } from '@/helpers/saveFormData';
+import { saveFormData } from '@/helpers/saveFormData';
 import { toast, ToastContainer } from 'react-toastify';
 import styles from '@/styles/register.module.css';
 import Link from 'next/link';
@@ -13,7 +12,6 @@ function GenericForm({ url, renderForm }: Props) {
   // const { data, error } = useSWR(url, fetcher);
   const {
     register,
-    reset,
     handleSubmit,
     setError,
     formState: { isSubmitting, errors, isDirty },

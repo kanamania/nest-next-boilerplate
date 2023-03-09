@@ -102,7 +102,7 @@ services:
     ports:
       - 666:666
     working_dir: /var/www/html/client
-    entrypoint: ["npm", "run", "dev" ]
+    entrypoint: ["npm", "run", "start" ]
     networks:
       - admin_net
 

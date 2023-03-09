@@ -11,6 +11,8 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
     "@next/font": "^13.2.3",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@restart/hooks": "^0.4.9",
     "express-jwt": "^8.4.1",
     "next": "13.2.3",
     "react": "18.2.0",

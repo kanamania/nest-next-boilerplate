@@ -14,6 +14,7 @@ import { InvestmentEntity } from '../entity/investment.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TResponse } from '../types/TResponse';
 import { FileService } from '../service/file.service';
+import { Public } from '../utils/ispublic';
 @Controller('investments')
 export class InvestmentController {
   private response: TResponse = new TResponse();
@@ -40,14 +41,14 @@ export class InvestmentController {
       return this.response;
     });
   }
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
+  @Public()
   async find(@Param('id') id: string) {
     console.log({ env: process.env });
     return await this.investmentService.findById(parseInt(id));
   }
-  @UseGuards(JwtAuthGuard)
   @Get()
+  @Public()
   async findAll(@Request() request) {
     console.log(request.body);
     const investments: Array<InvestmentEntity> =

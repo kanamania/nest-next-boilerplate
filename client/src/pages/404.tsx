@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 
-export default function Diaspora() {
+export default function () {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   useEffect(() => {
     setInitialRenderComplete(true);
   }, []);
   if (!initialRenderComplete) return null;
-  else return <h1>Diaspora</h1>;
+  else return <h1>404</h1>;
 }
 
 export async function getStaticProps() {
   return {
     props: {
       headerInfo: {
-        heading: 'Diaspora',
+        heading: '404 Not Found',
         text: 'Heading description',
         buttonText: 'Click here',
         buttonLink: '#',
       },
       meta: {
-        title: 'Diaspora',
-        description: 'Diaspora',
+        title: '404 Not Found',
+        description: '404 Not Found',
       },
-      current: 'diaspora',
+      current: '404',
     },
   };
 }

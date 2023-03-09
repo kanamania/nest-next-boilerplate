@@ -1,7 +1,5 @@
-import getConfig from 'next/config';
 import { AuthService } from '@/services/auth.service';
-
-const { publicRuntimeConfig } = getConfig();
+import { Configs } from '../../configs';
 
 export const fetchWrapper = {
   get,
@@ -52,7 +50,7 @@ function authHeader(url: any) {
   // return auth header with jwt if user is logged in and request is to the api url
   const user = AuthService.userValue;
   const isLoggedIn = user && user.token;
-  const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
+  const isApiUrl = url.startsWith(Configs.apiUrl);
   if (isLoggedIn && isApiUrl) {
     return { Authorization: `Bearer ${user.token}` };
   } else {
@@ -61,9 +59,7 @@ function authHeader(url: any) {
 }
 
 function handleResponse(response: any) {
-  return response.text().then((text: any) => {
-    const data = text && JSON.parse(text);
-
+  return response.json().then((data: any) => {
     if (!response.ok) {
       if ([401, 403].includes(response.status) && AuthService.userValue) {
         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
@@ -77,3 +73,7 @@ function handleResponse(response: any) {
     return data;
   });
 }
+export const history = {
+  navigate: null,
+  location: null,
+};

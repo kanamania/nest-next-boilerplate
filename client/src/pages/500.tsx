@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function Diaspora() {
+export default function () {
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   useEffect(() => {
@@ -14,16 +14,16 @@ export async function getStaticProps() {
   return {
     props: {
       headerInfo: {
-        heading: 'Diaspora',
+        heading: '500 - Server Error',
         text: 'Heading description',
         buttonText: 'Click here',
         buttonLink: '#',
       },
       meta: {
-        title: 'Diaspora',
-        description: 'Diaspora',
+        title: '500 - Server Error',
+        description: '500 - Server Error',
       },
-      current: 'diaspora',
+      current: '500',
     },
   };
 }
