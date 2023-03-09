@@ -65,9 +65,7 @@ function MyApp({ Component, pageProps }: any) {
           content={pageProps.meta ? pageProps.meta.description : ''}
         />
         <link rel="icon" href="/favicon.ico" />
-        <title>
-          {pageProps.meta ? pageProps.meta.title : ''} | Alpha Project
-        </title>
+        <title>{pageProps.meta!.title || ' |'} Alpha Project</title>
       </Head>
       <RootLayout
         current={pageProps.current ? pageProps.current : ''}
