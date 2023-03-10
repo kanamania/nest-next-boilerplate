@@ -6,6 +6,8 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AuthService } from '@/services/auth.service';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 function MyApp({ Component, pageProps }: any) {
   const router = useRouter();
@@ -57,7 +59,7 @@ function MyApp({ Component, pageProps }: any) {
   }
 
   return (
-    <>
+    <Provider store={store}>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta
@@ -73,7 +75,7 @@ function MyApp({ Component, pageProps }: any) {
       >
         <Component {...pageProps} />
       </RootLayout>
-    </>
+    </Provider>
   );
 }
 

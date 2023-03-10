@@ -73,7 +73,12 @@ function handleResponse(response: any) {
     return data;
   });
 }
+<<<<<<< Updated upstream
 export const history = {
+=======
+
+export const history: any = {
+>>>>>>> Stashed changes
   navigate: null,
   location: null,
 };
