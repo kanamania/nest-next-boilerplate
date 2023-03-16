@@ -5,7 +5,7 @@ import { CustomExceptionFilter } from './utils/all-exceptions.filter';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bodyParser = require('body-parser');
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors();
   app.useGlobalFilters(new CustomExceptionFilter());
   app.use(

@@ -23,32 +23,36 @@ export default function RootLayout({
   const [initial, setInitial] = useState(true);
   useEffect(() => {
     if (!initial) return;
-    localStorage.setItem(
-      'social_links',
-      JSON.stringify([
-        {
-          title: 'twitter',
-          icon: '/twitter.svg',
-          link: '#',
-        },
-        {
-          title: 'facebook',
-          icon: '/facebook.svg',
-          link: '#',
-        },
-        {
-          title: 'instagram',
-          icon: '/instagram.svg',
-          link: '#',
-        },
-      ]),
-    );
+    if (typeof window !== 'undefined')
+      localStorage.setItem(
+        'social_links',
+        JSON.stringify([
+          {
+            title: 'twitter',
+            icon: '/twitter.svg',
+            link: '#',
+          },
+          {
+            title: 'facebook',
+            icon: '/facebook.svg',
+            link: '#',
+          },
+          {
+            title: 'instagram',
+            icon: '/instagram.svg',
+            link: '#',
+          },
+        ]),
+      );
   }, [initial]);
   useEffect(() => {
-    const _links = localStorage.getItem('social_links');
-
+    let _links: any = '';
+    if (typeof window !== 'undefined') {
+      _links = localStorage.getItem('social_links');
+    } else {
+      _links = '[]';
+    }
     const links = _links !== null ? JSON.parse(_links) : [];
-
     setSocialMediaLinks(links);
     setInitial(false);
   }, []);

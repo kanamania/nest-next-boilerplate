@@ -75,7 +75,7 @@
   margin-right: 9px;
   border: none;
   display: inline-flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 8px;
   align-items: center;
   gap: 10px;
